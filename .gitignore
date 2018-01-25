@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.terraform/*
+
+# Misc
+.DS_Store
+.env
+npm-debug.log

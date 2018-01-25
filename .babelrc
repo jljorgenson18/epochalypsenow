@@ -1,0 +1,47 @@
+{
+  "env": {
+    "dev-webpack": {
+      "presets": [
+        [
+          "env",
+          {
+            "targets": {
+              "browsers": ["> 1%", "IE >= 11"]
+            },
+            "modules": false,
+            "debug": false,
+            "useBuiltIns": "entry"
+          }
+        ],
+        "react"
+      ],
+      "plugins": [
+        "react-hot-loader/babel",
+        "transform-class-properties",
+        "transform-object-rest-spread",
+        "babel-plugin-styled-components"
+      ]
+    },
+    "webpack": {
+      "presets": [
+        [
+          "env",
+          {
+            "targets": {
+              "browsers": ["> 1%", "IE >= 11"]
+            },
+            "modules": false,
+            "debug": false,
+            "useBuiltIns": "entry"
+          }
+        ],
+        "react"
+      ],
+      "plugins": [
+        "transform-class-properties",
+        "transform-object-rest-spread",
+        "babel-plugin-styled-components"
+      ]
+    }
+  }
+}

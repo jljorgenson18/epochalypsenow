@@ -1,0 +1,17 @@
+version: 0.2
+
+env:
+  variables:
+    BUCKET_NAME: epochalypsenow
+phases:
+  install:
+    commands:
+      - apt-get update -y
+  pre_build:
+    commands:
+      - npm install
+  build:
+    commands:
+      - npm test
+      - npm run build:prod
+      - aws s3 sync ./dist s3://$BUCKET_NAME --delete
