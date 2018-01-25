@@ -85,15 +85,13 @@ module.exports = {
         }
       ]
     }),
-    !devMode
-      ? new FaviconsWebpackPlugin({
-          logo: './static/images/favicon-base.jpg',
-          prefix: 'static/images/favicons/',
-          persistentCache: true,
-          inject: true,
-          title: 'Epochalypse Now'
-        })
-      : null,
+    new FaviconsWebpackPlugin({
+      logo: './static/images/favicon-base.jpg',
+      prefix: 'static/images/favicons/',
+      persistentCache: true,
+      inject: true,
+      title: 'Epochalypse Now'
+    }),
     !devMode ? new ImageminPlugin({ test: /\.(jpe?g|png|gif|svg)$/i }) : null
   ].filter(Boolean)
 };
