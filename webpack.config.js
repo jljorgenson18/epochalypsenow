@@ -70,6 +70,8 @@ module.exports = {
     }),
     devMode ? new webpack.NamedModulesPlugin() : null,
     devMode ? new webpack.HotModuleReplacementPlugin() : null,
+    // So moment doesn't blow everything up
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     !devMode ? new MinifyPlugin() : null,
 
     // General Assets

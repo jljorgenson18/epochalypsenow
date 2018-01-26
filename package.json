@@ -49,6 +49,7 @@
     "date-fns": "^1.29.0",
     "es6-promise": "^4.2.2",
     "lodash": "^4.17.4",
+    "moment-timezone": "^0.5.14",
     "polished": "^1.9.0",
     "promise.prototype.finally": "^3.1.0",
     "prop-types": "^15.6.0",
