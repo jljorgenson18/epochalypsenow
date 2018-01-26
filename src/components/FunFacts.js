@@ -32,7 +32,8 @@ class FunFacts extends Component {
       loading: true
     });
     const formattedDate = dateFormat(date, 'M/D');
-    fetch(`http://numbersapi.com/${formattedDate}/date?json`)
+    // We put a proxy in front of numbersapi.com in order to get https
+    fetch(`https://epochalypsenow.io/${formattedDate}/date?json`)
       .then(response => response.json())
       .then(data => {
         if (data && data.found) {
