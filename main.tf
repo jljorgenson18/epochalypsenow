@@ -97,12 +97,12 @@ resource "aws_cloudfront_distribution" "cf" {
   }
 
   cache_behavior {
-    allowed_methods        = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
+    allowed_methods        = ["GET", "HEAD"]
     cached_methods         = ["GET", "HEAD"]
     compress               = false
     target_origin_id       = "${local.numbers_api_id}"
     viewer_protocol_policy = "redirect-to-https"
-    min_ttl                = 0
+    min_ttl                = 15
     default_ttl            = 86400
     max_ttl                = 31536000
     path_pattern           = "*/date"
