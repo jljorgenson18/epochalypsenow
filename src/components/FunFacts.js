@@ -19,6 +19,16 @@ class FunFacts extends Component {
     funFact: null
   };
 
+  componentDidMount() {
+    this.setFunFact(this.props.date);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.date !== this.props.date) {
+      this.setFunFact(this.props.date);
+    }
+  }
+
   // We do a debounce function to prevent being rate limited
   setFunFact = debounce(date => {
     if (!date) {
@@ -48,16 +58,6 @@ class FunFacts extends Component {
         });
       });
   }, 200);
-
-  componentDidMount() {
-    this.setFunFact(this.props.date);
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.date !== this.props.date) {
-      this.setFunFact(this.props.date);
-    }
-  }
 
   render() {
     const { funFact, loading } = this.state;
