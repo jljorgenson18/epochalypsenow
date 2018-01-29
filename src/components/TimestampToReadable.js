@@ -7,6 +7,7 @@ import { unformat } from 'accounting';
 import moment from 'moment-timezone';
 
 import FunFacts from './FunFacts';
+import DatePicker from './DatePicker';
 
 // console.log(moment.tz.names());
 const MAX_TIMESTAMP_VALUE = 999999999999999;
@@ -24,7 +25,7 @@ class TimestampToReadable extends Component {
     timestamp: null
   };
 
-  handleChange = event => {
+  handleTimestampChange = event => {
     const { value } = event.target;
     let newTimestamp = null;
     let newDate = null;
@@ -35,6 +36,10 @@ class TimestampToReadable extends Component {
       newDate = parse(newTimestamp);
     }
     this.setState({ timestamp: newTimestamp, date: newDate });
+  };
+  handleDatePickerChange = date => {
+    console.log(date);
+    this.setState({ timestamp: date[0].getTime(), date: date[0] });
   };
 
   render() {
@@ -47,10 +52,9 @@ class TimestampToReadable extends Component {
         <input
           type="text"
           value={timestamp ? String(timestamp) : ''}
-          onChange={this.handleChange}
+          onChange={this.handleTimestampChange}
         />
-        {date && isValid(date) ? <h5>Local: {date.toString()}</h5> : null}
-        {date && isValid(date) ? <h5>UTC: {date.toUTCString()}</h5> : null}
+        <DatePicker onChange={this.handleDatePickerChange} date={date} />
         <FunFacts date={date} />
       </Wrapper>
     );

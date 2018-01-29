@@ -5,6 +5,7 @@ import styled, { injectGlobal } from 'styled-components';
 import { hot } from 'react-hot-loader';
 
 import TimestampToReadable from './TimestampToReadable';
+import DatePicker from './DatePicker';
 
 injectGlobal`
   ${normalize()}
