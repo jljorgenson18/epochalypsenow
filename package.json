@@ -3,15 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "concurrently --kill-others \"npm run web-dev\" \"npm run lint:watch\"",
+    "start": "npm run web-dev",
     "lint": "eslint -f stylish src/  *.js",
-    "lint:watch": "esw -f simple-detail -w --changed src/ *.js",
     "lint:css": "stylelint './src/**/*.js'",
     "web-dev": "webpack-dev-server --config webpack.config.js",
     "webpack:dev": "webpack --config webpack.config.js",
     "webpack:prod": "NODE_ENV=production webpack --config webpack.config.js",
     "postmerge": "npm install",
-    "analyzeBundleSize": "NODE_ENV=production webpack --config ./webpack.config.js --json | webpack-bundle-size-analyzer"
+    "analyzeBundleSize": "NODE_ENV=production webpack --config ./webpack.config.js --json | webpack-bundle-size-analyzer",
+    "build": "npm run webpack:prod",
+    "deploy": "npm run build && aws s3 sync ./dist s3://epochalypsenow --delete"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
@@ -23,7 +24,6 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "clean-webpack-plugin": "^0.1.17",
-    "concurrently": "^3.5.1",
     "copy-webpack-plugin": "^4.3.1",
     "css-loader": "^0.28.9",
     "eslint": "^4.15.0",
