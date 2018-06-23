@@ -5,9 +5,20 @@ import Flatpickr from 'react-flatpickr';
 import 'flatpickr/dist/themes/material_blue.css';
 
 class DatePicker extends Component {
+  propTypes = {
+    date: PropTypes.instanceOf(Date),
+    onChange: PropTypes.func.isRequired
+  };
+
   render() {
     const { date, onChange } = this.props;
-    return <Flatpickr data-enable-time value={date} onChange={onChange} />;
+    return (
+      <Flatpickr
+        options={{ allowInput: true, enableTime: true }}
+        value={date}
+        onChange={onChange}
+      />
+    );
   }
 }
 
