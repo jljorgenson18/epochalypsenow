@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import parse from 'date-fns/parse';
-import isValid from 'date-fns/is_valid';
 import styled from 'styled-components';
 import { unformat } from 'accounting';
 import moment from 'moment-timezone';
 
-import FunFacts from './FunFacts';
 import DatePicker from './DatePicker';
 
-// console.log(moment.tz.names());
-const MAX_TIMESTAMP_VALUE = 999999999999999;
+const MAX_SECOND_TIMESTAMP_VALUE = 999999999999;
+const MAX_MILLISECOND_TIMESTAMP_VALUE = MAX_SECOND_TIMESTAMP_VALUE * 1000;
 const SECOND_DATE_FORMAT = 'X';
 const MILLISECOND_DATE_FORMAT = 'x';
 
@@ -51,15 +47,11 @@ class TimestampToReadable extends Component {
     this.setState({ timestamp: newTimestamp, date: newDate });
   };
   handleDatePickerChange = date => {
-    console.log(date);
     this.setState({ timestamp: date.format(SECOND_DATE_FORMAT), date: date });
   };
 
   render() {
     const { date, timestamp } = this.state;
-    // console.log(
-    //   // `Timezone Offset is ${date ? date.getTimezoneOffset() / 60 : ''}`
-    // );
     return (
       <Wrapper>
         <input
@@ -67,9 +59,7 @@ class TimestampToReadable extends Component {
           value={timestamp ? String(timestamp) : ''}
           onChange={this.handleTimestampChange}
         />
-
         <DatePicker onChange={this.handleDatePickerChange} date={date} />
-        {/* <FunFacts date={date} /> */}
       </Wrapper>
     );
   }
