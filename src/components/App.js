@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { normalize } from 'polished';
 import styled, { injectGlobal } from 'styled-components';
 import { hot } from 'react-hot-loader';
 
 import TimestampToReadable from './TimestampToReadable';
-import DatePicker from './DatePicker';
 
 injectGlobal`
   ${normalize()}

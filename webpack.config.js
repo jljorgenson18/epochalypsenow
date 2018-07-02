@@ -14,12 +14,9 @@ const devMode = process.env.NODE_ENV !== 'production';
 process.env.BABEL_ENV = devMode ? 'dev-webpack' : 'webpack';
 
 module.exports = {
-  cache: devMode,
   devtool: devMode ? 'cheap-module-source-map' : undefined,
   context: __dirname,
-  performance: {
-    hints: false
-  },
+  mode: devMode ? 'development' : 'production',
   entry: {
     index: ['./src/index.js']
   },
@@ -48,30 +45,23 @@ module.exports = {
         loader: 'babel-loader'
       },
       {
-        test: /\.json$/,
-        loader: 'json-loader'
-      },
-      {
         test: /\.css$/,
         use: [{ loader: 'style-loader' }, { loader: 'css-loader' }]
       }
     ]
   },
+  optimization: {
+    minimizer: [new MinifyPlugin()]
+  },
   plugins: [
     new CleanWebpackPlugin(['dist']),
-
     // Javascript Plugins
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(
         devMode ? 'development' : 'production'
       )
     }),
-    devMode ? new webpack.NamedModulesPlugin() : null,
     devMode ? new webpack.HotModuleReplacementPlugin() : null,
-    // So moment doesn't blow everything up
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    !devMode ? new MinifyPlugin() : null,
-
     // General Assets
     new CopyWebpackPlugin([{ from: './static', to: 'static' }]),
     new HtmlWebpackPlugin({

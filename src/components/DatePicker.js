@@ -21,7 +21,7 @@ const StyledPicker = styled(Picker)`
 
 class DatePicker extends Component {
   static propTypes = {
-    // date: PropTypes.object,
+    date: PropTypes.object,
     onChange: PropTypes.func.isRequired
   };
 
