@@ -4,6 +4,8 @@ import styled, { injectGlobal } from 'styled-components';
 import { hot } from 'react-hot-loader';
 
 import TimestampToReadable from './TimestampToReadable';
+import ReadableToTimestamp from './ReadableToTimestamp';
+import Output from './Output';
 
 injectGlobal`
   ${normalize()}
@@ -32,6 +34,7 @@ class App extends Component {
       <Wrapper>
         <h1>Epochalypse Now!</h1>
         <TimestampToReadable />
+        <ReadableToTimestamp />
       </Wrapper>
     );
   }

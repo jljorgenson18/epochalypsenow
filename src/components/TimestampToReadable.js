@@ -46,9 +46,6 @@ class TimestampToReadable extends Component {
     }
     this.setState({ timestamp: newTimestamp, date: newDate });
   };
-  handleDatePickerChange = date => {
-    this.setState({ timestamp: date.format(SECOND_DATE_FORMAT), date: date });
-  };
 
   render() {
     const { date, timestamp } = this.state;
@@ -59,7 +56,6 @@ class TimestampToReadable extends Component {
           value={timestamp ? String(timestamp) : ''}
           onChange={this.handleTimestampChange}
         />
-        <DatePicker onChange={this.handleDatePickerChange} date={date} />
       </Wrapper>
     );
   }
