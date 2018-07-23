@@ -3,6 +3,6 @@ import ReactDOM from 'react-dom';
 
 import './Polyfills';
 
-import App from './components/App';
+import App from './containers/App';
 
 ReactDOM.render(<App />, document.getElementById('app'));

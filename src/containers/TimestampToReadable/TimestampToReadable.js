@@ -8,8 +8,6 @@ import { timestampFormats } from '../../Constants';
 
 const MAX_SECOND_TIMESTAMP_VALUE = 999999999999;
 const MAX_MILLISECOND_TIMESTAMP_VALUE = MAX_SECOND_TIMESTAMP_VALUE * 1000;
-const SECOND_DATE_FORMAT = 'X';
-const MILLISECOND_DATE_FORMAT = 'x';
 
 const Wrapper = styled.div`
   display: flex;

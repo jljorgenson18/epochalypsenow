@@ -5,9 +5,9 @@ import Toggle from 'react-toggle';
 import 'react-toggle/style.css';
 
 import TimestampOutput from './TimestampOutput';
-import DatePicker from '../DatePicker';
 import AddTimeToDate from './AddTimeToDate';
 import { timestampFormats } from '../../Constants';
+import DatePicker from '../../components/formControls/DatePicker';
 
 // Like iso without the timezone
 const tzConversionFormat = 'YYYY-MM-DDTHH:mm:ss';
