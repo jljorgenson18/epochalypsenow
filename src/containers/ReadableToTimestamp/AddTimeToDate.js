@@ -41,12 +41,12 @@ class AddTimeToDate extends Component {
     const { operator, timeKey, amount } = this.state;
     return (
       <div>
-        <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
-          <select name="operator" value={operator}>
+        <form onSubmit={this.handleSubmit}>
+          <select name="operator" value={operator} onChange={this.handleChange}>
             <option value="add">add</option>
             <option value="subtract">subtract</option>
           </select>
-          <select name="timeKey" value={timeKey}>
+          <select name="timeKey" value={timeKey} onChange={this.handleChange}>
             <option value="years">years</option>
             <option value="months">months</option>
             <option value="weeks">weeks</option>
@@ -55,7 +55,14 @@ class AddTimeToDate extends Component {
             <option value="seconds">seconds</option>
             <option value="milliseconds">milliseconds</option>
           </select>
-          <input type="number" step="1" min="0" name="amount" value={amount} />
+          <input
+            type="number"
+            step="1"
+            min="0"
+            name="amount"
+            value={amount}
+            onChange={this.handleChange}
+          />
           <button type="submit">Modify Date</button>
         </form>
       </div>
