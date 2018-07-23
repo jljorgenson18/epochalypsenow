@@ -5,6 +5,8 @@ import { hot } from 'react-hot-loader';
 
 import TimestampToReadable from './TimestampToReadable/index';
 import ReadableToTimestamp from './ReadableToTimestamp/index';
+import Tabs from '../components/tabs/Tabs';
+import Tab from '../components/tabs/Tab';
 
 injectGlobal`
   ${normalize()}
@@ -28,12 +30,39 @@ const Wrapper = styled.main`
 `;
 
 class App extends Component {
+  state = {
+    activeSection: 'readableToTimestamp'
+  };
+
+  handleClick = section => {
+    this.setState({ activeSection: section });
+  };
+
   render() {
+    const { activeSection } = this.state;
     return (
       <Wrapper>
         <h1>Epochalypse Now!</h1>
-        <TimestampToReadable />
-        <ReadableToTimestamp />
+        <Tabs>
+          <Tab
+            section="readableToTimestamp"
+            onClick={this.handleClick}
+            activeTab={activeSection}>
+            Readable To Timestamp
+          </Tab>
+          <Tab
+            section="timestampToReadable"
+            onClick={this.handleClick}
+            activeTab={activeSection}>
+            Timestamp To Readable
+          </Tab>
+        </Tabs>
+        {activeSection === 'readableToTimestamp' ? (
+          <ReadableToTimestamp />
+        ) : null}
+        {activeSection === 'timestampToReadable' ? (
+          <TimestampToReadable />
+        ) : null}
       </Wrapper>
     );
   }
