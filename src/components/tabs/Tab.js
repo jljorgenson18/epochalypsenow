@@ -9,10 +9,12 @@ const StyledTab = styled.div`
     border: 2px grey solid;
     background: none;
   }
+
   button.active {
     background-color: grey;
     color: white;
   }
+
   button:focus {
     outline: none;
   }

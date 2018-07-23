@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import Tab from './Tab';
-
 const TabContainer = styled.div`
   display: flex;
   margin-bottom: 40px;
