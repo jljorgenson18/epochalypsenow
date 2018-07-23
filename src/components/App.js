@@ -3,9 +3,8 @@ import { normalize } from 'polished';
 import styled, { injectGlobal } from 'styled-components';
 import { hot } from 'react-hot-loader';
 
-import TimestampToReadable from './TimestampToReadable';
-import ReadableToTimestamp from './ReadableToTimestamp';
-import Output from './Output';
+import TimestampToReadable from './TimestampToReadable/index';
+import ReadableToTimestamp from './ReadableToTimestamp/index';
 
 injectGlobal`
   ${normalize()}

@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { unformat } from 'accounting';
 import moment from 'moment-timezone';
 
-import DatePicker from './DatePicker';
+import ReadableOutput from './ReadableOutput';
+import { timestampFormats } from '../../Constants';
 
 const MAX_SECOND_TIMESTAMP_VALUE = 999999999999;
 const MAX_MILLISECOND_TIMESTAMP_VALUE = MAX_SECOND_TIMESTAMP_VALUE * 1000;
@@ -29,10 +30,14 @@ const Wrapper = styled.div`
 `;
 
 class TimestampToReadable extends Component {
-  state = {
-    date: moment(),
-    timestamp: moment().format(SECOND_DATE_FORMAT)
-  };
+  constructor(props) {
+    super(props);
+    const initialDate = moment();
+    this.state = {
+      outputDate: initialDate,
+      timestamp: initialDate.format(timestampFormats.seconds)
+    };
+  }
 
   handleTimestampChange = event => {
     const { value } = event.target;
@@ -41,14 +46,14 @@ class TimestampToReadable extends Component {
     if (value) {
       // We want to add a max timestamp to prevent weird
       // scientific notation issues and to keep the dates valid
-      newTimestamp = Math.min(unformat(value), MAX_TIMESTAMP_VALUE);
-      newDate = moment(newTimestamp, SECOND_DATE_FORMAT);
+      newTimestamp = Math.min(unformat(value), MAX_SECOND_TIMESTAMP_VALUE);
+      newDate = moment(newTimestamp, timestampFormats.seconds);
     }
-    this.setState({ timestamp: newTimestamp, date: newDate });
+    this.setState({ timestamp: newTimestamp, outputDate: newDate });
   };
 
   render() {
-    const { date, timestamp } = this.state;
+    const { outputDate, timestamp } = this.state;
     return (
       <Wrapper>
         <input
@@ -56,6 +61,7 @@ class TimestampToReadable extends Component {
           value={timestamp ? String(timestamp) : ''}
           onChange={this.handleTimestampChange}
         />
+        <ReadableOutput date={outputDate} />
       </Wrapper>
     );
   }

@@ -34,7 +34,7 @@ class DatePicker extends Component {
           onChange={onChange}
           timeIntervals={15}
           showTimeSelect
-          timeFormat="HH:mm"
+          timeFormat="LT"
           dateFormat="LLL"
         />
       </Wrapper>
