@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import moment from 'moment-timezone';
+import Toggle from 'react-toggle';
+import 'react-toggle/style.css';
 
 import TimestampOutput from './TimestampOutput';
 import DatePicker from '../DatePicker';
 import AddTimeToDate from './AddTimeToDate';
+import { timestampFormats } from '../../Constants';
 
 // Like iso without the timezone
 const tzConversionFormat = 'YYYY-MM-DDTHH:mm:ss';
 
-const getOutputDate = values => {
-  const { timezone, pickedDate } = values;
+const getTimestamp = values => {
+  const { timezone, pickedDate, formatType } = values;
   if (!pickedDate || !timezone) {
     return null;
   }
-  return moment.tz(
-    pickedDate.format(tzConversionFormat),
-    tzConversionFormat,
-    timezone
-  );
+  return moment
+    .tz(pickedDate.format(tzConversionFormat), tzConversionFormat, timezone)
+    .format(timestampFormats[formatType]);
 };
 
 const timezones = moment.tz.names();
@@ -28,10 +29,11 @@ class ReadableToTimestamp extends Component {
     super(props);
     const initialDate = moment();
     this.state = {
-      outputDate: initialDate,
+      timestamp: initialDate.format(timestampFormats.seconds),
       formValues: {
-        pickedDate: initialDate.clone(),
-        timezone: moment.tz.guess()
+        pickedDate: initialDate,
+        timezone: moment.tz.guess(),
+        formatType: 'seconds'
       }
     };
   }
@@ -39,7 +41,7 @@ class ReadableToTimestamp extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevState.formValues !== this.state.formValues) {
       this.setState({
-        outputDate: getOutputDate(this.state.formValues)
+        timestamp: getTimestamp(this.state.formValues)
       });
     }
   }
@@ -75,22 +77,36 @@ class ReadableToTimestamp extends Component {
       });
     }
   };
+  handleFormatTypeChange = event => {
+    const {
+      target: { checked, name }
+    } = event;
+    this.setState({
+      formValues: {
+        ...this.state.formValues,
+        [name]: checked ? 'seconds' : 'milliseconds'
+      }
+    });
+  };
 
   render() {
     const {
-      outputDate,
-      formValues: { timezone, pickedDate }
+      timestamp,
+      formValues: { timezone, pickedDate, formatType }
     } = this.state;
     return (
       <div className="readable">
-        <form onChange={this.handleChange}>
+        <form>
           <DatePicker
             date={pickedDate}
             onChange={this.handleDatePickerChange}
           />
           <div className="form-group">
             <label>Timezone</label>
-            <select value={timezone} name="timezone">
+            <select
+              value={timezone}
+              name="timezone"
+              onChange={this.handleChange}>
               {timezones.map(zone => {
                 return (
                   <option value={zone} key={zone}>
@@ -100,9 +116,20 @@ class ReadableToTimestamp extends Component {
               })}
             </select>
           </div>
+          <div className="form-group">
+            <Toggle
+              checked={formatType === 'seconds'}
+              value={formatType}
+              name="formatType"
+              onChange={this.handleFormatTypeChange}
+            />
+            <label>
+              {formatType === 'seconds' ? 'Seconds' : 'Milliseconds'}
+            </label>
+          </div>
         </form>
         <AddTimeToDate onModify={this.handleModify} date={pickedDate} />
-        <TimestampOutput date={outputDate} />
+        <TimestampOutput timestamp={timestamp} />
       </div>
     );
   }
