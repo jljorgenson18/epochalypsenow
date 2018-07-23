@@ -4,6 +4,7 @@ import moment from 'moment-timezone';
 
 import TimestampOutput from './TimestampOutput';
 import DatePicker from '../DatePicker';
+import AddTimeToDate from './AddTimeToDate';
 
 // Like iso without the timezone
 const tzConversionFormat = 'YYYY-MM-DDTHH:mm:ss';
@@ -52,6 +53,15 @@ class ReadableToTimestamp extends Component {
     });
   };
 
+  handleModify = date => {
+    this.setState({
+      formValues: {
+        ...this.state.formValues,
+        pickedDate: date
+      }
+    });
+  };
+
   handleChange = event => {
     const {
       target: { name, value }
@@ -91,6 +101,7 @@ class ReadableToTimestamp extends Component {
             </select>
           </div>
         </form>
+        <AddTimeToDate onModify={this.handleModify} date={pickedDate} />
         <TimestampOutput date={outputDate} />
       </div>
     );
