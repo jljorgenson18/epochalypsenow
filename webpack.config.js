@@ -75,6 +75,7 @@ module.exports = {
         }
       ]
     }),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new FaviconsWebpackPlugin({
       logo: './static/images/favicon-base.jpg',
       prefix: 'static/images/favicons/',

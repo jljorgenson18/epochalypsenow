@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { normalize } from 'polished';
 import styled, { injectGlobal } from 'styled-components';
-import { hot } from 'react-hot-loader';
+import { translate } from 'react-i18next';
 
 import TimestampToReadable from './TimestampToReadable/index';
 import ReadableToTimestamp from './ReadableToTimestamp/index';
@@ -30,6 +31,10 @@ const Wrapper = styled.main`
 `;
 
 class App extends Component {
+  static propTypes = {
+    t: PropTypes.func.isRequired
+  };
+
   state = {
     activeSection: 'readableToTimestamp'
   };
@@ -39,6 +44,7 @@ class App extends Component {
   };
 
   render() {
+    const { t } = this.props;
     const { activeSection } = this.state;
     return (
       <Wrapper>
@@ -48,13 +54,13 @@ class App extends Component {
             section="readableToTimestamp"
             onClick={this.handleClick}
             activeTab={activeSection}>
-            Readable To Timestamp
+            {t('readableToTimestamp')}
           </Tab>
           <Tab
             section="timestampToReadable"
             onClick={this.handleClick}
             activeTab={activeSection}>
-            Timestamp To Readable
+            {t('timestampToReadable')}
           </Tab>
         </Tabs>
         {activeSection === 'readableToTimestamp' ? (
@@ -68,4 +74,4 @@ class App extends Component {
   }
 }
 
-export default hot(module)(App);
+export default translate()(App);
