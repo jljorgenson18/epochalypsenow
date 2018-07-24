@@ -3,8 +3,6 @@ import Cache from 'i18next-localstorage-cache';
 
 import en from './en';
 
-console.log(en);
-
 const getResources = locale => {
   const resources = {
     en: {
