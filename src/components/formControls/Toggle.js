@@ -1,7 +1,13 @@
 import styled from 'styled-components';
 import ReactToggle from 'react-toggle';
+import { darken } from 'polished';
 
-const Toggle = styled(ReactToggle)`
+const Toggle = styled(ReactToggle).attrs({
+  // or we can define dynamic ones
+  checkColor: props => props.checkColor || 'tomato',
+  fontColorChecked: props => props.fontColorChecked || 'tomato',
+  fontColorUnchecked: props => props.fontColorUnchecked || 'white'
+})`
   &.react-toggle {
     touch-action: pan-x;
 
@@ -154,17 +160,14 @@ const Toggle = styled(ReactToggle)`
     height: 50px;
     border-radius: 4px;
     width: 160px;
-    background-color: grey;
+    background-color: ${props => props.checkColor};
   }
   &.react-toggle--checked .react-toggle-track {
-    background-color: grey;
+    background-color: ${props => props.checkColor};
   }
-  &.react-toggle--checked:hover:not(.react-toggle--disabled)
-    .react-toggle-track {
-    background-color: grey;
-  }
+
   &.react-toggle:hover:not(.react-toggle--disabled) .react-toggle-track {
-    background-color: #4d4d4d;
+    background-color: ${props => darken(0.2, props.checkColor)};
   }
   .react-toggle-thumb {
     width: 78px;
@@ -176,7 +179,7 @@ const Toggle = styled(ReactToggle)`
   }
   &.react-toggle--checked .react-toggle-thumb {
     left: 80px;
-    border-color: grey;
+    border-color: ${props => props.checkColor};
   }
   &.react-toggle::after {
     content: 'MS';
@@ -188,8 +191,7 @@ const Toggle = styled(ReactToggle)`
     text-transform: uppercase;
     text-align: center;
     width: 80px;
-    // background: grey;
-    -webkit-transform: translate3d(0, 0, 0);
+    color: ${props => props.fontColorChecked};
     transform: translate3d(0, 0, 0);
   }
   &.react-toggle::before {
@@ -202,15 +204,14 @@ const Toggle = styled(ReactToggle)`
     width: 80px;
     text-transform: uppercase;
     text-align: center;
-    color: white;
-    -webkit-transform: translate3d(0, 0, 0);
+    color: ${props => props.fontColorUnchecked};
     transform: translate3d(0, 0, 0);
   }
   &.react-toggle--checked:not(.react-toggle--disabled)::before {
-    color: grey;
+    color: ${props => props.fontColorChecked};
   }
   &.react-toggle--checked:not(.react-toggle--disabled)::after {
-    color: white;
+    color: ${props => props.fontColorUnchecked};
   }
 `;
 
