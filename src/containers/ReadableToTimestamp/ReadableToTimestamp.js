@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import moment from 'moment-timezone';
-import Toggle from 'react-toggle';
-import 'react-toggle/style.css';
 
 import TimestampOutput from './TimestampOutput';
 import AddTimeToDate from './AddTimeToDate';
 import { timestampFormats } from '../../Constants';
 import DatePicker from '../../components/formControls/DatePicker';
+import Toggle from '../../components/formControls/Toggle';
 
 // Like iso without the timezone
 const tzConversionFormat = 'YYYY-MM-DDTHH:mm:ss';
@@ -120,6 +119,7 @@ class ReadableToTimestamp extends Component {
             <Toggle
               checked={formatType === 'seconds'}
               value={formatType}
+              icons={false}
               name="formatType"
               onChange={this.handleFormatTypeChange}
             />

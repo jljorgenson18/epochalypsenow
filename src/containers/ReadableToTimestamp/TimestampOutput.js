@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
+import Button from '../../components/Button';
+
 class TimestampOutput extends Component {
   static propTypes = {
     timestamp: PropTypes.string
@@ -35,7 +37,7 @@ class TimestampOutput extends Component {
         <div>Output Area </div>
         <textarea name="output" value={timestamp} readOnly />
         <CopyToClipboard text={timestamp} onCopy={this.handleCopy}>
-          <button>{this.state.copied ? 'Copied!' : 'Copy'}</button>
+          <Button>{this.state.copied ? 'Copied!' : 'Copy'}</Button>
         </CopyToClipboard>
       </div>
     );

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import Button from '../../components/Button';
+
 const modifyDate = (values, currentDate) => {
   const { operator, timeKey, amount } = values;
   const newDate = currentDate.clone();
@@ -63,7 +65,7 @@ class AddTimeToDate extends Component {
             value={amount}
             onChange={this.handleChange}
           />
-          <button type="submit">Modify Date</button>
+          <Button type="submit">Modify Date</Button>
         </form>
       </div>
     );
