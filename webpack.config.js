@@ -6,6 +6,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MinifyPlugin = require('babel-minify-webpack-plugin');
 const RobotstxtPlugin = require('robotstxt-webpack-plugin').default;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
@@ -18,7 +19,7 @@ module.exports = {
   context: __dirname,
   mode: devMode ? 'development' : 'production',
   entry: {
-    index: ['./src/index.js']
+    index: './src/index.js'
   },
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -83,6 +84,16 @@ module.exports = {
       inject: true,
       title: 'Epochalypse Now'
     }),
-    !devMode ? new ImageminPlugin({ test: /\.(jpe?g|png|gif|svg)$/i }) : null
+    !devMode ? new ImageminPlugin({ test: /\.(jpe?g|png|gif|svg)$/i }) : null,
+    !devMode
+      ? new SWPrecacheWebpackPlugin({
+          cacheId: 'epochalypsenow',
+          dontCacheBustUrlsMatching: /\.\w{8}\./,
+          filename: 'service-worker.js',
+          minify: true,
+          navigateFallback: '/',
+          staticFileGlobsIgnorePatterns: [/\.map$/]
+        })
+      : null
   ].filter(Boolean)
 };
