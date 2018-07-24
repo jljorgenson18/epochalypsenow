@@ -8,7 +8,7 @@ import App from './App';
 import i18n, { initialize as i18nInitialize } from '../i18n/index';
 
 const getLocale = () => {
-  return 'fr-CH'; //navigator.language;
+  return navigator.language;
 };
 
 const loadMomentData = localName => {
