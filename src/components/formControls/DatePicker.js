@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Picker from 'react-datepicker';
 
-import 'react-datepicker/dist/react-datepicker.css';
+if (process.env.NODE_ENV !== 'test') {
+  require('react-datepicker/dist/react-datepicker.css');
+}
 
 const Wrapper = styled.div`
   a {

@@ -1,0 +1,12 @@
+{
+  "reporter": [
+    "html",
+    "text"
+  ],
+  "report-dir": "./quality/coverage",
+  "sourceMap": false,
+  "instrument": false,
+  "include": ["src/**/*.js"],
+  "exclude": ["test/**/*.js"],
+  "all": true
+}

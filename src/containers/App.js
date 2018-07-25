@@ -74,4 +74,5 @@ class App extends Component {
   }
 }
 
+export const AppComponent = App;
 export default translate()(App);
