@@ -4,22 +4,34 @@ import PropTypes from 'prop-types';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import Button from '../../components/Button';
+import { timestampFormats } from '../../Constants';
+import Toggle from '../../components/formControls/Toggle';
 
 class TimestampOutput extends Component {
   static propTypes = {
-    timestamp: PropTypes.string
+    outputDate: PropTypes.object
   };
 
   state = {
-    copied: false
+    copied: false,
+    formatType: 'seconds'
   };
 
   handleCopy = () => {
     this.setState({ copied: true });
   };
 
+  handleFormatTypeChange = event => {
+    const {
+      target: { checked }
+    } = event;
+    this.setState({
+      formatType: checked ? 'seconds' : 'milliseconds'
+    });
+  };
+
   componentDidUpdate(prevProps) {
-    if (prevProps.timestamp !== this.props.timestamp) {
+    if (prevProps.outputDate !== this.props.outputDate) {
       this.setState({
         copied: false
       });
@@ -27,17 +39,32 @@ class TimestampOutput extends Component {
   }
 
   render() {
-    const { timestamp } = this.props;
-    if (!timestamp) {
+    const { formatType, copied } = this.state;
+    const { outputDate } = this.props;
+    if (!outputDate) {
       return null;
     }
+    const timestamp = outputDate.format(timestampFormats[formatType]);
 
     return (
       <div>
         <div>Output Area </div>
+        <div className="form-group">
+          <Toggle
+            checked={formatType === 'seconds'}
+            value={formatType}
+            icons={false}
+            name="formatType"
+            onChange={this.handleFormatTypeChange}
+            checkColor="#9a8e9c"
+            fontColorChecked="#9a8e9c"
+            fontColorUnchecked="#ffffff"
+          />
+          <label>{formatType === 'seconds' ? 'Seconds' : 'Milliseconds'}</label>
+        </div>
         <textarea name="output" value={timestamp} readOnly />
         <CopyToClipboard text={timestamp} onCopy={this.handleCopy}>
-          <Button>{this.state.copied ? 'Copied!' : 'Copy'}</Button>
+          <Button>{copied ? 'Copied!' : 'Copy'}</Button>
         </CopyToClipboard>
       </div>
     );
