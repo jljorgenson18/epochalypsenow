@@ -9,7 +9,7 @@ describe('App', () => {
   let mockProps;
   beforeEach(() => {
     mockProps = {
-      t: key => key
+      t: sinon.stub().callsFake(key => key)
     };
   });
 
@@ -29,5 +29,20 @@ describe('App', () => {
 
     // Assert
     expect(wrapper.find('App__Wrapper')).to.have.length(1);
+  });
+
+  it('should update the activeSection when clicking a tab', () => {
+    // Arrange
+    const wrapper = mount(<AppComponent {...mockProps} />);
+
+    // Act
+    wrapper
+      .find('Tabs Tab')
+      .at(1)
+      .find('button')
+      .simulate('click');
+
+    // Assert
+    expect(wrapper.state('activeSection')).to.equal('timestampToReadable');
   });
 });

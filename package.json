@@ -16,7 +16,7 @@
     "deploy": "npm run build && aws s3 sync ./dist s3://epochalypsenow --delete",
     "test": "BABEL_ENV=test NODE_ENV=test mocha -r babel-register -r babel-polyfill -r test/Setup.js --recursive test/unit/*",
     "test:coverage": "BABEL_ENV=test-coverage NODE_ENV=test nyc mocha -r babel-register -r babel-polyfill -r test/Setup.js --recursive test/unit/*",
-    "test:watch": "npm run test -- -watch"
+    "test:watch": "npm run test -- -watch --reporter='landing'"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.5",
