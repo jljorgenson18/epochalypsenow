@@ -9,6 +9,7 @@
     "web-dev": "webpack-dev-server --config webpack.config.js",
     "webpack:dev": "webpack --config webpack.config.js",
     "webpack:prod": "NODE_ENV=production webpack --config webpack.config.js",
+    "precommit": "npm test",
     "postmerge": "npm install",
     "analyzeBundleSize": "NODE_ENV=production webpack --config ./webpack.config.js --json | webpack-bundle-size-analyzer",
     "build": "npm run webpack:prod",
