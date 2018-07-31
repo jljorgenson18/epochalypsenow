@@ -25,8 +25,6 @@ injectGlobal`
 const Wrapper = styled.main`
   background-color: #fff2f0;
   display: grid;
-  // flex-direction: column;
-  // justify-content: center;
   align-items: center;
   height: 100vh;
   grid-template-columns: 50% 50%;
