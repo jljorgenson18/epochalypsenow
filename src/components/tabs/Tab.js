@@ -26,6 +26,10 @@ const StyledTab = styled.div`
     background: #9b9b9b;
   }
 
+  button:hover {
+    color: #9b9b9b;
+  }
+
   button:hover::after {
     width: 100%;
     left: 0;
