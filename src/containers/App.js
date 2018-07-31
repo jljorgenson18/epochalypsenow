@@ -44,6 +44,19 @@ const Header = styled.header`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: relative;
+
+  &::after {
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 0;
+    right: -20px;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 20px solid #e5e5e5;
+  }
+
   h1 {
     font-weight: 400;
     text-transform: uppercase;
