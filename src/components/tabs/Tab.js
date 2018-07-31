@@ -3,16 +3,36 @@ import styled from 'styled-components';
 
 const StyledTab = styled.div`
   button {
-    color: grey;
+    color: #e5e5e5;
     font-size: 18px;
-    padding: 10px 20px;
-    border: 2px grey solid;
+    padding: 10px 0;
+    border: none;
     background: none;
+    margin: 10px;
+    position: relative;
+    overflow: hidden;
+    transition: 0.3s;
   }
-
+  button:after {
+    position: absolute;
+    transition: 0.3s;
+    content: '';
+    width: 0;
+    left: 50%;
+    bottom: 0;
+    height: 2px;
+    background: #9b9b9b;
+  }
+  button:hover:after {
+    width: 100%;
+    left: 0;
+  }
   button.active {
-    background-color: grey;
-    color: white;
+    color: #9b9b9b;
+  }
+  button.active:after {
+    width: 100%;
+    left: 0;
   }
 
   button:focus {

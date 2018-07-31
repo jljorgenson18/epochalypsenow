@@ -60,7 +60,7 @@ class TimestampOutput extends Component {
             fontColorChecked="#9a8e9c"
             fontColorUnchecked="#ffffff"
           />
-          <label>{formatType === 'seconds' ? 'Seconds' : 'Milliseconds'}</label>
+          <label>{formatType === 'seconds' ? 'ss' : 'ms'}</label>
         </div>
         <textarea name="output" value={timestamp} readOnly />
         <CopyToClipboard text={timestamp} onCopy={this.handleCopy}>

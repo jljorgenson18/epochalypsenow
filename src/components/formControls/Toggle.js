@@ -157,9 +157,9 @@ const Toggle = styled(ReactToggle).attrs({
   }
 
   .react-toggle-track {
-    height: 50px;
-    border-radius: 4px;
-    width: 160px;
+    // height: 24px;
+    // border-radius: 4px;
+    // width: 160px;
     background-color: ${props => props.checkColor};
   }
   &.react-toggle--checked .react-toggle-track {
@@ -170,27 +170,28 @@ const Toggle = styled(ReactToggle).attrs({
     background-color: ${props => darken(0.2, props.checkColor)};
   }
   .react-toggle-thumb {
-    width: 78px;
-    height: 46px;
-    top: 2px;
-    left: 2px;
-    border-radius: 4px;
-    border: none;
+    // width: 26px;
+    // height: 26px;
+    // top: -1px;
+    //   left: 2px;
+    //   border-radius: 4px;
+    border-color: ${props => props.checkColor};
   }
   &.react-toggle--checked .react-toggle-thumb {
-    left: 80px;
+    // left: 80px;
     border-color: ${props => props.checkColor};
   }
   &.react-toggle::after {
     content: 'MS';
     position: absolute;
-    top: 2px;
-    left: 2px;
-    line-height: 46px;
+    top: 0;
+    left: -44px;
+    line-height: 24px;
     z-index: 5;
     text-transform: uppercase;
     text-align: center;
-    width: 80px;
+    height: 24px;
+    width: 50px;
     color: ${props => props.fontColorChecked};
     transform: translate3d(0, 0, 0);
   }
@@ -198,10 +199,11 @@ const Toggle = styled(ReactToggle).attrs({
     content: 'SS';
     position: absolute;
     top: 0;
-    right: 2px;
-    line-height: 50px;
+    right: -44px;
+    line-height: 24px;
     z-index: 5;
-    width: 80px;
+    width: 50px;
+    height: 24px;
     text-transform: uppercase;
     text-align: center;
     color: ${props => props.fontColorUnchecked};

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const TabContainer = styled.div`
   display: flex;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 `;
 
 class Tabs extends Component {
