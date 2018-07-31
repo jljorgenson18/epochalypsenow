@@ -7,6 +7,16 @@ import Button from '../../components/Button';
 import { timestampFormats } from '../../Constants';
 import Toggle from '../../components/formControls/Toggle';
 
+const Output = styled.div`
+  textarea {
+    width: 100%;
+    min-height: 200px;
+    border: 1px solid C2C2C2;
+    border-radius: 2px;
+    padding: 10px;
+  }
+`;
+
 class TimestampOutput extends Component {
   static propTypes = {
     outputDate: PropTypes.object
@@ -47,7 +57,7 @@ class TimestampOutput extends Component {
     const timestamp = outputDate.format(timestampFormats[formatType]);
 
     return (
-      <div>
+      <Output>
         <div>Output Area </div>
         <div className="form-group">
           <Toggle
@@ -66,7 +76,7 @@ class TimestampOutput extends Component {
         <CopyToClipboard text={timestamp} onCopy={this.handleCopy}>
           <Button>{copied ? 'Copied!' : 'Copy'}</Button>
         </CopyToClipboard>
-      </div>
+      </Output>
     );
   }
 }

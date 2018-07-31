@@ -30,8 +30,10 @@ const Wrapper = styled.main`
   align-items: center;
   height: 100vh;
   grid-template-columns: 50% 50%;
-  grid-template-rows: repeat(3, minmax(100vh, auto));
-  grid-template-areas: 'header activeSection';
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    'header tabs'
+    'header activeSection';
 `;
 const Header = styled.header`
   background-color: #e5e5e5;
@@ -47,14 +49,16 @@ const Header = styled.header`
     text-transform: uppercase;
   }
 `;
-const ActiveSection = styled.div`
+const Calculator = styled.div`
   grid-area: activeSection;
   background-color: white;
   height: 100%;
+`;
+
+const ActiveSection = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
 `;
 
 class App extends Component {
@@ -78,7 +82,7 @@ class App extends Component {
         <Header>
           <h1>Epochalypse Now</h1>
         </Header>
-        <ActiveSection>
+        <Calculator>
           <Tabs>
             <Tab
               section="readableToTimestamp"
@@ -93,13 +97,15 @@ class App extends Component {
               {t('timestampToReadable')}
             </Tab>
           </Tabs>
-          {activeSection === 'readableToTimestamp' ? (
-            <ReadableToTimestamp />
-          ) : null}
-          {activeSection === 'timestampToReadable' ? (
-            <TimestampToReadable />
-          ) : null}
-        </ActiveSection>
+          <ActiveSection>
+            {activeSection === 'readableToTimestamp' ? (
+              <ReadableToTimestamp />
+            ) : null}
+            {activeSection === 'timestampToReadable' ? (
+              <TimestampToReadable />
+            ) : null}
+          </ActiveSection>
+        </Calculator>
       </Wrapper>
     );
   }

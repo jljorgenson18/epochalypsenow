@@ -10,7 +10,6 @@ const Toggle = styled(ReactToggle).attrs({
 })`
   &.react-toggle {
     touch-action: pan-x;
-
     display: inline-block;
     position: relative;
     cursor: pointer;

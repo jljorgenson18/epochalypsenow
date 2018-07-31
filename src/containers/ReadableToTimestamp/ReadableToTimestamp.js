@@ -5,6 +5,7 @@ import moment from 'moment-timezone';
 import TimestampOutput from './TimestampOutput';
 import AddTimeToDate from './AddTimeToDate';
 import DatePicker from '../../components/formControls/DatePicker';
+import StyledSelect from '../../components/formControls/Select';
 
 // Like iso without the timezone
 const tzConversionFormat = 'YYYY-MM-DDTHH:mm:ss';
@@ -90,7 +91,7 @@ class ReadableToTimestamp extends Component {
           />
           <div className="form-group">
             <label>Timezone</label>
-            <select
+            <StyledSelect
               value={timezone}
               name="timezone"
               onChange={this.handleChange}>
@@ -101,7 +102,7 @@ class ReadableToTimestamp extends Component {
                   </option>
                 );
               })}
-            </select>
+            </StyledSelect>
           </div>
         </form>
         <AddTimeToDate onModify={this.handleModify} date={pickedDate} />

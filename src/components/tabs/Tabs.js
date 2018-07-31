@@ -2,8 +2,14 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const TabContainer = styled.div`
+const TabsContainer = styled.div`
+  grid-area: tabs;
+  margin-top: 20px;
+`;
+
+const Tab = styled.div`
   display: flex;
+  justify-content: center;
   margin-bottom: 20px;
 `;
 
@@ -15,10 +21,9 @@ class Tabs extends Component {
   render() {
     const { children } = this.props;
     return (
-      <div>
-        <h3>Choose a conversion:</h3>
-        <TabContainer>{children}</TabContainer>
-      </div>
+      <TabsContainer>
+        <Tab>{children}</Tab>
+      </TabsContainer>
     );
   }
 }

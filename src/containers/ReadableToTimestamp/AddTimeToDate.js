@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Button from '../../components/Button';
+import StyledSelect from '../../components/formControls/Select';
+import StyledInput from '../../components/formControls/Input';
 
 const modifyDate = (values, currentDate) => {
   const { operator, timeKey, amount } = values;
@@ -44,11 +46,17 @@ class AddTimeToDate extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <select name="operator" value={operator} onChange={this.handleChange}>
+          <StyledSelect
+            name="operator"
+            value={operator}
+            onChange={this.handleChange}>
             <option value="add">add</option>
             <option value="subtract">subtract</option>
-          </select>
-          <select name="timeKey" value={timeKey} onChange={this.handleChange}>
+          </StyledSelect>
+          <StyledSelect
+            name="timeKey"
+            value={timeKey}
+            onChange={this.handleChange}>
             <option value="years">years</option>
             <option value="months">months</option>
             <option value="weeks">weeks</option>
@@ -56,8 +64,8 @@ class AddTimeToDate extends Component {
             <option value="hours">hours</option>
             <option value="seconds">seconds</option>
             <option value="milliseconds">milliseconds</option>
-          </select>
-          <input
+          </StyledSelect>
+          <StyledInput
             type="number"
             step="1"
             min="0"

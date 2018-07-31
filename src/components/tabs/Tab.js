@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const StyledTab = styled.div`
   button {
@@ -13,7 +14,8 @@ const StyledTab = styled.div`
     overflow: hidden;
     transition: 0.3s;
   }
-  button:after {
+
+  button::after {
     position: absolute;
     transition: 0.3s;
     content: '';
@@ -23,14 +25,17 @@ const StyledTab = styled.div`
     height: 2px;
     background: #9b9b9b;
   }
-  button:hover:after {
+
+  button:hover::after {
     width: 100%;
     left: 0;
   }
+
   button.active {
     color: #9b9b9b;
   }
-  button.active:after {
+
+  button.active::after {
     width: 100%;
     left: 0;
   }
@@ -41,6 +46,13 @@ const StyledTab = styled.div`
 `;
 
 class Tab extends Component {
+  static propTypes = {
+    section: PropTypes.string,
+    onClick: PropTypes.func.isRequired,
+    children: PropTypes.node.isRequired,
+    activeTab: PropTypes.string
+  };
+
   handleClick = event => {
     const { section, onClick } = this.props;
     onClick(section);
