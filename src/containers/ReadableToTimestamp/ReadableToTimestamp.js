@@ -90,18 +90,20 @@ class ReadableToTimestamp extends Component {
             onChange={this.handleDatePickerChange}
           />
           <div className="form-group">
-            <label>Timezone</label>
-            <StyledSelect
-              value={timezone}
-              name="timezone"
-              onChange={this.handleChange}>
-              {timezones.map(zone => {
-                return (
-                  <option value={zone} key={zone}>
-                    {zone}
-                  </option>
-                );
-              })}
+            <label>Timezone:</label>
+            <StyledSelect>
+              <select
+                value={timezone}
+                name="timezone"
+                onChange={this.handleChange}>
+                {timezones.map(zone => {
+                  return (
+                    <option value={zone} key={zone}>
+                      {zone}
+                    </option>
+                  );
+                })}
+              </select>
             </StyledSelect>
           </div>
         </form>

@@ -3,10 +3,9 @@ import styled from 'styled-components';
 const Button = styled.button`
   position: relative;
   display: block;
-  padding: 14px 15px;
+  padding: 5px 10px;
   color: grey;
-  font-size: 14px;
-  border-radius: 30px;
+  font-size: 12px;
   border: 2px solid grey;
   font-weight: bold;
   text-align: center;
@@ -30,7 +29,7 @@ const Button = styled.button`
     width: 0;
     height: 100%;
     background: grey;
-    transition: all 0.75s ease 0s;
+    transition: all 0.5s ease 0s;
     z-index: -1;
   }
 

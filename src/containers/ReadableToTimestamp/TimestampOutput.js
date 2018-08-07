@@ -14,6 +14,12 @@ const Output = styled.div`
     border: 1px solid C2C2C2;
     border-radius: 2px;
     padding: 10px;
+    position: relative;
+  }
+  .outputTop {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
   }
 `;
 
@@ -58,19 +64,19 @@ class TimestampOutput extends Component {
 
     return (
       <Output>
-        <div>Output Area </div>
-        <div className="form-group">
+        <div className="outputTop">
+          <span>Timestamp:</span>
           <Toggle
+            type="checkbox"
             checked={formatType === 'seconds'}
             value={formatType}
-            icons={false}
-            name="formatType"
+            toggleName="formatType"
             onChange={this.handleFormatTypeChange}
-            checkColor="#9a8e9c"
+            handlerColor="#9a8e9c"
+            backgroundColor="tomato"
             fontColorChecked="#9a8e9c"
             fontColorUnchecked="#ffffff"
           />
-          <label>{formatType === 'seconds' ? 'ss' : 'ms'}</label>
         </div>
         <textarea name="output" value={timestamp} readOnly />
         <CopyToClipboard text={timestamp} onCopy={this.handleCopy}>

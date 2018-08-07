@@ -30,19 +30,19 @@ const Wrapper = styled.main`
   grid-template-columns: 50% 50%;
   grid-template-rows: auto 1fr;
   grid-template-areas:
-    'header tabs'
-    'header activeSection';
+    '. tabs'
+    '. activeSection';
 `;
 const Header = styled.header`
   background-color: #e5e5e5;
   color: #9b9b9b;
-  grid-area: header;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  position: relative;
+  position: fixed;
+  width: 50%;
 
   &::after {
     position: absolute;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import Button from '../../components/Button';
 import StyledSelect from '../../components/formControls/Select';
@@ -11,6 +12,29 @@ const modifyDate = (values, currentDate) => {
   newDate[operator](amount, timeKey);
   return newDate;
 };
+const Wrapper = styled.div`
+  overflow: hidden;
+  button {
+    border: none;
+    text-decoration: underline;
+    &:focus {
+      outline: none;
+    }
+  }
+`;
+
+const CollapsibleForm = styled.form`
+  display: flex;
+  max-height: 0;
+  transition: all 0.4s ease-in-out;
+  opacity: 0;
+  padding: 10px;
+
+  &.open {
+    max-height: 400px;
+    opacity: 1;
+  }
+`;
 
 class AddTimeToDate extends Component {
   static propTypes = {
@@ -20,8 +44,14 @@ class AddTimeToDate extends Component {
   state = {
     operator: 'add',
     timeKey: 'days',
-    amount: 1
+    amount: 1,
+    expanded: false
   };
+  handleClick = () => {
+    this.setState({ expanded: !this.state.expanded });
+    console.log(this.state.expanded);
+  };
+
   handleSubmit = event => {
     event.preventDefault();
     const { onModify, date } = this.props;
@@ -42,40 +72,58 @@ class AddTimeToDate extends Component {
   };
 
   render() {
-    const { operator, timeKey, amount } = this.state;
+    const { operator, timeKey, amount, expanded } = this.state;
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <StyledSelect
-            name="operator"
-            value={operator}
-            onChange={this.handleChange}>
-            <option value="add">add</option>
-            <option value="subtract">subtract</option>
-          </StyledSelect>
-          <StyledSelect
-            name="timeKey"
-            value={timeKey}
-            onChange={this.handleChange}>
-            <option value="years">years</option>
-            <option value="months">months</option>
-            <option value="weeks">weeks</option>
-            <option value="days">days</option>
-            <option value="hours">hours</option>
-            <option value="seconds">seconds</option>
-            <option value="milliseconds">milliseconds</option>
-          </StyledSelect>
-          <StyledInput
-            type="number"
-            step="1"
-            min="0"
-            name="amount"
-            value={amount}
-            onChange={this.handleChange}
-          />
+      <Wrapper>
+        <button onClick={this.handleClick}>Modify Date</button>
+        <CollapsibleForm
+          onSubmit={this.handleSubmit}
+          className={expanded ? 'open' : ''}>
+          <div className="form-group">
+            <label>action:</label>
+            <StyledSelect>
+              <select
+                name="operator"
+                value={operator}
+                onChange={this.handleChange}>
+                <option value="add">add</option>
+                <option value="subtract">subtract</option>
+              </select>
+            </StyledSelect>
+          </div>
+          <div className="form-group">
+            <label>time unit:</label>
+            <StyledSelect>
+              <select
+                name="timeKey"
+                value={timeKey}
+                onChange={this.handleChange}>
+                <option value="years">years</option>
+                <option value="months">months</option>
+                <option value="weeks">weeks</option>
+                <option value="days">days</option>
+                <option value="hours">hours</option>
+                <option value="seconds">seconds</option>
+                <option value="milliseconds">milliseconds</option>
+              </select>
+            </StyledSelect>
+          </div>
+          <div className="form-group">
+            <label>amount:</label>
+            <StyledInput>
+              <input
+                type="number"
+                step="1"
+                min="0"
+                name="amount"
+                value={amount}
+                onChange={this.handleChange}
+              />
+            </StyledInput>
+          </div>
           <Button type="submit">Modify Date</Button>
-        </form>
-      </div>
+        </CollapsibleForm>
+      </Wrapper>
     );
   }
 }
