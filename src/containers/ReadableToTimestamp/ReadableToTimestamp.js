@@ -22,7 +22,26 @@ const getOutputDate = values => {
   );
 };
 
-const timezones = moment.tz.names();
+const getSortedTimezones = () => {
+  const timezones = moment.tz.names();
+  return timezones
+    .map(zone => {
+      const offset = moment.tz(zone).format('Z');
+      return {
+        name: zone,
+        label: `(GMT ${offset}) ${zone}`,
+        offset: offset
+      };
+    })
+    .sort((a, b) => {
+      return (
+        parseInt(a.offset.replace(':', ''), 10) -
+        parseInt(b.offset.replace(':', ''), 10)
+      );
+    });
+};
+
+const timezones = getSortedTimezones();
 
 class ReadableToTimestamp extends Component {
   constructor(props) {
@@ -98,8 +117,8 @@ class ReadableToTimestamp extends Component {
                 onChange={this.handleChange}>
                 {timezones.map(zone => {
                   return (
-                    <option value={zone} key={zone}>
-                      {zone}
+                    <option value={zone.name} key={zone.name}>
+                      {zone.label}
                     </option>
                   );
                 })}
