@@ -1,58 +1,59 @@
 import i18next from 'i18next';
 import Cache from 'i18next-localstorage-cache';
 
-import en from './en';
+const defaultLocale = 'en';
 
-const getResources = locale => {
-  const resources = {
-    en: {
-      translation: en
-    }
-  };
-  if (locale === 'en-US' || locale === 'en') {
-    return Promise.resolve(resources);
-  }
-  return import(/* webpackChunkName: "i18n-locales/[index]" */ `./${locale}.json`)
-    .catch(err => {
-      return import(/* w bpackChunkName: "i18n-locales/[index]" */ `./${
-        locale.split('-')[0]
-      }.json`);
-    })
-    .catch(err => console.log(err))
-    .then(localeModule => {
-      if (localeModule) {
-        resources[locale] = {
-          translation: localeModule.default
-        };
+const getResources = () => {
+  // So we can skip the require.context
+  if (process.env.NODE_ENV === 'test') {
+    return {
+      en: {
+        translation: require('./en.json')
       }
-      return resources;
-    });
+    };
+  }
+  const localeContext = require.context('./', false, /\.json$/);
+  return localeContext.keys().reduce((resources, localeFile) => {
+    const localeName = localeFile.replace(/\.json/g, '').replace(/\.\//g, '');
+    resources[localeName] = {
+      translation: localeContext(localeFile)
+    };
+    return resources;
+  }, {});
 };
 
-export const initialize = locale => {
-  return getResources(locale).then(resources => {
-    return new Promise((resolve, reject) => {
-      i18next.use(Cache).init(
-        {
-          lng: locale,
-          debug: process.env.NODE_ENV === 'development',
-          fallbackLng: 'en',
-          resources: resources,
-          interpolation: {
-            escapeValue: false
-          },
-          react: {
-            wait: false // We do this ourself
-          }
+const resources = getResources();
+
+export const initialize = (locale = '') => {
+  locale = locale.replace(/_/g, '-');
+  // Falling back to the top level language if it is not available
+  if (!resources[locale]) {
+    locale = locale.split('-')[0];
+  }
+  if (!resources[locale]) {
+    locale = defaultLocale;
+  }
+  return new Promise((resolve, reject) => {
+    i18next.use(Cache).init(
+      {
+        lng: locale,
+        debug: process.env.NODE_ENV === 'development',
+        fallbackLng: 'en',
+        resources: resources,
+        interpolation: {
+          escapeValue: false
         },
-        (err, t) => {
-          if (err) {
-            reject(err);
-          }
-          resolve(t);
+        react: {
+          wait: false // We do this ourself
         }
-      );
-    });
+      },
+      (err, t) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(t);
+      }
+    );
   });
 };
 
