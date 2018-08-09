@@ -21,7 +21,7 @@ describe('App', () => {
     expect(AppComponent).to.be.ok;
   });
 
-  it('should render the app', () => {
+  xit('should render the app', () => {
     // Arrange
 
     // Act
@@ -31,7 +31,7 @@ describe('App', () => {
     expect(wrapper.find('App__Wrapper')).to.have.length(1);
   });
 
-  it('should update the activeSection when clicking a tab', () => {
+  xit('should update the activeSection when clicking a tab', () => {
     // Arrange
     const wrapper = mount(<AppComponent {...mockProps} />);
 
