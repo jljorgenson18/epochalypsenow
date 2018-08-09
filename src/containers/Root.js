@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import { IntlProvider, addLocaleData } from 'react-intl';
 import { hot } from 'react-hot-loader';
 import moment from 'moment-timezone';
 import { I18nextProvider } from 'react-i18next';
@@ -11,15 +10,15 @@ const getLocale = () => {
   return navigator.language;
 };
 
-const loadMomentData = localName => {
+const loadMomentData = localeName => {
   // We already have it if we are english us
-  if (localName === 'en-US' || localName === 'en') {
+  if (localeName === 'en-US' || localeName === 'en') {
     return Promise.resolve();
   }
-  return import(/* webpackChunkName: "moment-locales/[index]" */ `moment/locale/${localName.toLowerCase()}.js`)
+  return import(/* webpackChunkName: "moment-locales/[index]" */ `moment/locale/${localeName.toLowerCase()}.js`)
     .catch(err =>
       import(/* webpackChunkName: "moment-locales/[index]" */ `moment/locale/${
-        localName.split('-')[0]
+        localeName.split('-')[0]
       }.js`)
     )
     .catch(err => console.error(err));
