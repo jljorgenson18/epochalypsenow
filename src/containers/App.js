@@ -33,7 +33,16 @@ const Wrapper = styled.main`
   grid-template-areas:
     '. tabs'
     '. activeSection';
+
+  @media all and (max-width: 768px) {
+    grid-template-areas:
+      'hd hd'
+      'tabs tabs'
+      'activeSection activeSection';
+    grid-template-rows: auto auto 1fr;
+  }
 `;
+
 const Header = styled.header`
   background-color: #e5e5e5;
   color: #9b9b9b;
@@ -44,6 +53,7 @@ const Header = styled.header`
   flex-direction: column;
   position: fixed;
   width: 50%;
+  grid-area: hd;
 
   &::after {
     position: absolute;
@@ -60,18 +70,34 @@ const Header = styled.header`
     font-weight: 400;
     text-transform: uppercase;
   }
+
+  @media all and (max-width: 768px) {
+    position: relative;
+    width: 100%;
+
+    &::after {
+      position: absolute;
+      content: '';
+      bottom: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-right: 20px solid transparent;
+      border-top: 20px solid #e5e5e5;
+      border-left: 20px solid transparent;
+    }
+  }
 `;
 const Calculator = styled.div`
   grid-area: activeSection;
   background-color: white;
   height: 100%;
+  padding: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
 `;
 
-const ActiveSection = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+const ActiveSection = styled.div``;
 
 class App extends Component {
   static propTypes = {

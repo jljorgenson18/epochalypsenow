@@ -14,9 +14,11 @@ const modifyDate = (values, currentDate) => {
 };
 const Wrapper = styled.div`
   overflow: hidden;
-  button {
+
+  .accordionTrigger {
     border: none;
     text-decoration: underline;
+
     &:focus {
       outline: none;
     }
@@ -25,6 +27,7 @@ const Wrapper = styled.div`
 
 const CollapsibleForm = styled.form`
   display: flex;
+  flex-wrap: wrap;
   max-height: 0;
   transition: all 0.4s ease-in-out;
   opacity: 0;
@@ -75,52 +78,51 @@ class AddTimeToDate extends Component {
     const { operator, timeKey, amount, expanded } = this.state;
     return (
       <Wrapper>
-        <button onClick={this.handleClick}>Modify Date</button>
+        <button className="accordionTrigger" onClick={this.handleClick}>
+          Modify Date
+        </button>
         <CollapsibleForm
           onSubmit={this.handleSubmit}
           className={expanded ? 'open' : ''}>
-          <div className="form-group">
-            <label>action:</label>
-            <StyledSelect>
-              <select
-                name="operator"
-                value={operator}
-                onChange={this.handleChange}>
-                <option value="add">add</option>
-                <option value="subtract">subtract</option>
-              </select>
-            </StyledSelect>
-          </div>
-          <div className="form-group">
-            <label>time unit:</label>
-            <StyledSelect>
-              <select
-                name="timeKey"
-                value={timeKey}
-                onChange={this.handleChange}>
-                <option value="years">years</option>
-                <option value="months">months</option>
-                <option value="weeks">weeks</option>
-                <option value="days">days</option>
-                <option value="hours">hours</option>
-                <option value="seconds">seconds</option>
-                <option value="milliseconds">milliseconds</option>
-              </select>
-            </StyledSelect>
-          </div>
-          <div className="form-group">
-            <label>amount:</label>
-            <StyledInput>
-              <input
-                type="number"
-                step="1"
-                min="0"
-                name="amount"
-                value={amount}
-                onChange={this.handleChange}
-              />
-            </StyledInput>
-          </div>
+          <StyledSelect>
+            <label htmlFor="operator">action:</label>
+            <select
+              name="operator"
+              id="operator"
+              value={operator}
+              onChange={this.handleChange}>
+              <option value="add">add</option>
+              <option value="subtract">subtract</option>
+            </select>
+          </StyledSelect>
+          <StyledSelect>
+            <label htmlFor="timeKey">time unit:</label>
+            <select
+              name="timeKey"
+              id="timeKey"
+              value={timeKey}
+              onChange={this.handleChange}>
+              <option value="years">years</option>
+              <option value="months">months</option>
+              <option value="weeks">weeks</option>
+              <option value="days">days</option>
+              <option value="hours">hours</option>
+              <option value="seconds">seconds</option>
+              <option value="milliseconds">milliseconds</option>
+            </select>
+          </StyledSelect>
+          <StyledInput>
+            <label htmlFor="amount">amount:</label>
+            <input
+              type="number"
+              step="1"
+              min="0"
+              name="amount"
+              id="amount"
+              value={amount}
+              onChange={this.handleChange}
+            />
+          </StyledInput>
           <Button type="submit">Modify Date</Button>
         </CollapsibleForm>
       </Wrapper>

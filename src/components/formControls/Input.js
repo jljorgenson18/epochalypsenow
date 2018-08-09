@@ -2,11 +2,29 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 
 const StyledInput = styled.div`
-  border: 1px solid #c2c2c2;
   border-radius: 2px;
   position: relative;
-  margin: 10px 10px 10px 0;
-  width: 200px;
+  margin: 8px;
+  min-width: 120px;
+  border: 0;
+  display: inline-flex;
+  padding: 0;
+  flex-direction: column;
+
+  label {
+    /* pointer-events: none; */
+    margin: 0;
+    color: $placeHolderColor;
+    z-index: 1;
+    transition: all 0.2s ease-in-out;
+    background-color: rgba(255, 255, 255, 0);
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 0 4px;
+    font-size: 14px;
+    line-height: 20px;
+  }
 
   &::after {
     left: 0;
@@ -15,16 +33,17 @@ const StyledInput = styled.div`
     content: '\00a0';
     position: absolute;
     transition: border 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    border-bottom: 0 solid #c2c2c2;
+    border-bottom: 1px solid #c2c2c2;
     pointer-events: none;
   }
+
   input {
     appearance: textfield;
     background-color: #fff;
     border: none;
-    padding: 10px 0 10px 10px;
-    min-width: 200px;
-    box-sizing: border-box;
+    padding: 10px;
+    width: 100%;
+    margin-top: 18px;
   }
 
   &:hover {
