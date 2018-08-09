@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
 import moment from 'moment-timezone';
 import { I18nextProvider } from 'react-i18next';
+import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
+import MomentUtils from 'material-ui-pickers/utils/moment-utils';
 
 import App from './App';
 import i18n, { initialize as i18nInitialize } from '../i18n/index';
@@ -46,7 +48,9 @@ class Root extends Component {
     if (i18nInitialized) {
       return (
         <I18nextProvider i18n={i18n}>
-          <App />
+          <MuiPickersUtilsProvider utils={MomentUtils}>
+            <App />
+          </MuiPickersUtilsProvider>
         </I18nextProvider>
       );
     }

@@ -13,6 +13,7 @@ injectGlobal`
   ${normalize()}
 
   @import url('https://fonts.googleapis.com/css?family=Roboto');
+  @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
   * {
     font-family: 'Roboto', sans-serif;

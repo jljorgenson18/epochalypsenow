@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import moment from 'moment-timezone';
+import DateTimePicker from 'material-ui-pickers/DateTimePicker';
 
 import TimestampOutput from './TimestampOutput';
 import AddTimeToDate from './AddTimeToDate';
-import DatePicker from '../../components/formControls/DatePicker';
+// import DatePicker from '../../components/formControls/DatePicker';
 import StyledSelect from '../../components/formControls/Select';
 
 // Like iso without the timezone
@@ -106,6 +107,8 @@ class ReadableToTimestamp extends Component {
         <form>
           <DatePicker
             date={pickedDate}
+          <DateTimePicker
+            value={pickedDate}
             onChange={this.handleDatePickerChange}
           />
           <div className="form-group">
