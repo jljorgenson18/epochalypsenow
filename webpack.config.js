@@ -9,9 +9,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
-const devMode = process.env.NODE_ENV !== 'production';
-
+const devMode =
+  process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'analysis';
+const analysisMode = process.env.NODE_ENV === 'analysis';
 process.env.BABEL_ENV = devMode ? 'dev-webpack' : 'webpack';
 
 module.exports = {
@@ -77,15 +79,19 @@ module.exports = {
       ]
     }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    new FaviconsWebpackPlugin({
-      logo: './static/images/favicon-base.jpg',
-      prefix: 'static/images/favicons/',
-      persistentCache: true,
-      inject: true,
-      title: 'Epochalypse Now'
-    }),
-    !devMode ? new ImageminPlugin({ test: /\.(jpe?g|png|gif|svg)$/i }) : null,
-    !devMode
+    !analysisMode
+      ? new FaviconsWebpackPlugin({
+          logo: './static/images/favicon-base.jpg',
+          prefix: 'static/images/favicons/',
+          persistentCache: true,
+          inject: true,
+          title: 'Epochalypse Now'
+        })
+      : null,
+    !devMode && !analysisMode
+      ? new ImageminPlugin({ test: /\.(jpe?g|png|gif|svg)$/i })
+      : null,
+    !devMode && !analysisMode
       ? new SWPrecacheWebpackPlugin({
           cacheId: 'epochalypsenow',
           dontCacheBustUrlsMatching: /\.\w{8}\./,
@@ -94,6 +100,7 @@ module.exports = {
           navigateFallback: '/',
           staticFileGlobsIgnorePatterns: [/\.map$/]
         })
-      : null
+      : null,
+    analysisMode ? new BundleAnalyzerPlugin() : null
   ].filter(Boolean)
 };
