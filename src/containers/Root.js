@@ -4,9 +4,19 @@ import moment from 'moment-timezone';
 import { I18nextProvider } from 'react-i18next';
 import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
 import MomentUtils from 'material-ui-pickers/utils/moment-utils';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 import App from './App';
 import i18n, { initialize as i18nInitialize } from '../i18n/index';
+
+const theme = createMuiTheme({
+  palette: {},
+  spacing: {
+    unit: 8
+  },
+  typography: {}
+});
 
 const getLocale = () => {
   return navigator.language;
@@ -48,9 +58,13 @@ class Root extends Component {
     if (i18nInitialized) {
       return (
         <I18nextProvider i18n={i18n}>
-          <MuiPickersUtilsProvider utils={MomentUtils}>
-            <App />
-          </MuiPickersUtilsProvider>
+          <MuiThemeProvider theme={theme}>
+            <MuiPickersUtilsProvider utils={MomentUtils}>
+              <CssBaseline>
+                <App />
+              </CssBaseline>
+            </MuiPickersUtilsProvider>
+          </MuiThemeProvider>
         </I18nextProvider>
       );
     }

@@ -10,15 +10,11 @@ import Tabs from '../components/tabs/Tabs';
 import Tab from '../components/tabs/Tab';
 
 injectGlobal`
-  ${normalize()}
-
   @import url('https://fonts.googleapis.com/css?family=Roboto');
   @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
   * {
     font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
     color: #9b9b9b;
   }
 `;

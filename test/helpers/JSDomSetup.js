@@ -1,10 +1,7 @@
 const { JSDOM } = require('jsdom');
-const localStorage = require('mock-local-storage');
 const { fetch } = require('whatwg-fetch');
 
-const setupCustomWindow = window => {
-  window.localStorage = localStorage;
-};
+const setupCustomWindow = window => {};
 
 const setupDom = (customOptions = {}) => {
   // Need an empty script tag for some loaders
