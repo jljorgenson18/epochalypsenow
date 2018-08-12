@@ -15,11 +15,21 @@ const Output = styled.div`
     border-radius: 2px;
     padding: 10px;
     position: relative;
+    box-sizing: border-box;
   }
+
   .outputTop {
-    display: flex;
-    justify-content: space-between;
+    /* display: flex;
+    justify-content: space-between; */
+    margin-top: 10px;
     margin-bottom: 10px;
+    position: relative;
+
+    .toggle {
+      position: absolute;
+      right: 26px;
+      top: 0;
+    }
   }
 `;
 
