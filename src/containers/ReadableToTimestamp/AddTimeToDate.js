@@ -94,6 +94,9 @@ class AddTimeToDate extends Component {
               <option value="add">add</option>
               <option value="subtract">subtract</option>
             </select>
+            <span className="material-icons" aria-hidden="true">
+              keyboard_arrow_down
+            </span>
           </StyledSelect>
           <StyledSelect>
             <label htmlFor="timeKey">time unit:</label>
@@ -110,6 +113,9 @@ class AddTimeToDate extends Component {
               <option value="seconds">seconds</option>
               <option value="milliseconds">milliseconds</option>
             </select>
+            <span className="material-icons" aria-hidden="true">
+              keyboard_arrow_down
+            </span>
           </StyledSelect>
           <StyledInput>
             <label htmlFor="amount">amount:</label>

@@ -123,6 +123,9 @@ class ReadableToTimestamp extends Component {
                 );
               })}
             </select>
+            <span className="material-icons" aria-hidden="true">
+              keyboard_arrow_down
+            </span>
           </StyledSelect>
         </form>
         <AddTimeToDate onModify={this.handleModify} date={pickedDate} />

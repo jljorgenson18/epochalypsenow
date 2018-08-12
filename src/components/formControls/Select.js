@@ -47,6 +47,12 @@ const StyledSelect = styled.div`
     margin-top: 18px;
   }
 
+  span {
+    position: absolute;
+    right: 0;
+    bottom: 8px;
+  }
+
   &:hover {
     cursor: pointer;
 
