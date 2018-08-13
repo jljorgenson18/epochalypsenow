@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { normalize } from 'polished';
 import styled, { injectGlobal } from 'styled-components';
 import { translate } from 'react-i18next';
 
@@ -11,7 +10,6 @@ import Tab from '../components/tabs/Tab';
 
 injectGlobal`
   @import url('https://fonts.googleapis.com/css?family=Roboto');
-  @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
   * {
     font-family: 'Roboto', sans-serif;

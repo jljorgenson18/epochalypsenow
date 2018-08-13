@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import AddIcon from '@material-ui/icons/Add';
 
 import Button from '../../components/Button';
 import StyledSelect from '../../components/formControls/Select';
@@ -108,9 +109,7 @@ class AddTimeToDate extends Component {
       <Wrapper className={expanded ? 'open' : ''}>
         <button className="accordionTrigger" onClick={this.handleClick}>
           Modify Date
-          <span className="material-icons" aria-hidden="true">
-            add
-          </span>
+          <AddIcon />
         </button>
         <form onSubmit={this.handleSubmit} className={expanded ? 'open' : ''}>
           <StyledSelect
@@ -118,7 +117,7 @@ class AddTimeToDate extends Component {
             value={operator}
             onChange={this.handleChange}
             label="action"
-            options={[{ name: '' }, { name: 'add' }, { name: 'subtract' }]}
+            options={[{ name: 'add' }, { name: 'subtract' }]}
           />
           <StyledSelect
             name="timeKey"
@@ -126,7 +125,6 @@ class AddTimeToDate extends Component {
             onChange={this.handleChange}
             label="Time Unit"
             options={[
-              { name: '' },
               { name: 'years' },
               { name: 'months' },
               { name: 'weeks' },

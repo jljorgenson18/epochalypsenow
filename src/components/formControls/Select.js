@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
+import PropTypes from 'prop-types';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
 class StyledSelect extends Component {
+  static propTypes = {
+    name: PropTypes.string.isRequired,
+    value: PropTypes.any,
+    onChange: PropTypes.func.isRequired,
+    options: PropTypes.array.isRequired,
+    label: PropTypes.string.isRequired
+  };
   render() {
     const { name, value, onChange, label, options } = this.props;
     return (
@@ -23,7 +28,7 @@ class StyledSelect extends Component {
           {options.map(option => {
             return (
               <MenuItem value={option.name} key={option.name}>
-                {option.name}
+                {option.value || option.name}
               </MenuItem>
             );
           })}
