@@ -7,6 +7,7 @@ import TimestampToReadable from './TimestampToReadable/index';
 import ReadableToTimestamp from './ReadableToTimestamp/index';
 import Tabs from '../components/tabs/Tabs';
 import Tab from '../components/tabs/Tab';
+import CurrentTimestamp from '../components/CurrentTimestamp';
 
 injectGlobal`
   @import url('https://fonts.googleapis.com/css?family=Roboto');
@@ -113,6 +114,7 @@ class App extends Component {
       <Wrapper>
         <Header>
           <h1>Epochalypse Now</h1>
+          <CurrentTimestamp />
         </Header>
         <Calculator>
           <Tabs>
