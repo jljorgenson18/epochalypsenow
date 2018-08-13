@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Button from '../../components/Button';
 import StyledSelect from '../../components/formControls/Select';
-import StyledInput from '../../components/formControls/Input';
+import TextInput from '../../components/formControls/Input';
 
 const modifyDate = (values, currentDate) => {
   const { operator, timeKey, amount } = values;
@@ -113,51 +113,37 @@ class AddTimeToDate extends Component {
           </span>
         </button>
         <form onSubmit={this.handleSubmit} className={expanded ? 'open' : ''}>
-          <StyledSelect>
-            <label htmlFor="operator">action:</label>
-            <select
-              name="operator"
-              id="operator"
-              value={operator}
-              onChange={this.handleChange}>
-              <option value="add">add</option>
-              <option value="subtract">subtract</option>
-            </select>
-            <span className="material-icons" aria-hidden="true">
-              keyboard_arrow_down
-            </span>
-          </StyledSelect>
-          <StyledSelect>
-            <label htmlFor="timeKey">time unit:</label>
-            <select
-              name="timeKey"
-              id="timeKey"
-              value={timeKey}
-              onChange={this.handleChange}>
-              <option value="years">years</option>
-              <option value="months">months</option>
-              <option value="weeks">weeks</option>
-              <option value="days">days</option>
-              <option value="hours">hours</option>
-              <option value="seconds">seconds</option>
-              <option value="milliseconds">milliseconds</option>
-            </select>
-            <span className="material-icons" aria-hidden="true">
-              keyboard_arrow_down
-            </span>
-          </StyledSelect>
-          <StyledInput>
-            <label htmlFor="amount">amount:</label>
-            <input
-              type="number"
-              step="1"
-              min="0"
-              name="amount"
-              id="amount"
-              value={amount}
-              onChange={this.handleChange}
-            />
-          </StyledInput>
+          <StyledSelect
+            name="operator"
+            value={operator}
+            onChange={this.handleChange}
+            label="action"
+            options={[{ name: '' }, { name: 'add' }, { name: 'subtract' }]}
+          />
+          <StyledSelect
+            name="timeKey"
+            value={timeKey}
+            onChange={this.handleChange}
+            label="Time Unit"
+            options={[
+              { name: '' },
+              { name: 'years' },
+              { name: 'months' },
+              { name: 'weeks' },
+              { name: 'days' },
+              { name: 'hours' },
+              { name: 'seconds' },
+              { name: 'milliseconds' }
+            ]}
+          />
+          <TextInput
+            name="amount"
+            value={amount}
+            onChange={this.handleChange}
+            label="amount"
+            type="number"
+            inputProps={{ min: '0', step: '1' }}
+          />
           <Button type="submit">Modify Date</Button>
         </form>
       </Wrapper>
