@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import moment from 'moment-timezone';
 import DateTimePicker from 'material-ui-pickers/DateTimePicker';
 
 import TimestampOutput from './TimestampOutput';
 import AddTimeToDate from './AddTimeToDate';
-// import DatePicker from '../../components/formControls/DatePicker';
-import StyledSelect from '../../components/formControls/Select';
+import TimezonePicker from '../../components/formControls/TimezonePicker';
 
 // Like iso without the timezone
 const tzConversionFormat = 'YYYY-MM-DDTHH:mm:ss';
@@ -22,27 +20,6 @@ const getOutputDate = values => {
     timezone
   );
 };
-
-const getSortedTimezones = () => {
-  const timezones = moment.tz.names();
-  return timezones
-    .map(zone => {
-      const offset = moment.tz(zone).format('Z');
-      return {
-        name: zone,
-        label: `(GMT ${offset}) ${zone}`,
-        offset: offset
-      };
-    })
-    .sort((a, b) => {
-      return (
-        parseInt(a.offset.replace(':', ''), 10) -
-        parseInt(b.offset.replace(':', ''), 10)
-      );
-    });
-};
-
-const timezones = getSortedTimezones();
 
 class ReadableToTimestamp extends Component {
   constructor(props) {
@@ -109,24 +86,12 @@ class ReadableToTimestamp extends Component {
             value={pickedDate}
             onChange={this.handleDatePickerChange}
           />
-          <StyledSelect>
-            <label>Timezone:</label>
-            <select
-              value={timezone}
-              name="timezone"
-              onChange={this.handleChange}>
-              {timezones.map(zone => {
-                return (
-                  <option value={zone.name} key={zone.name}>
-                    {zone.label}
-                  </option>
-                );
-              })}
-            </select>
-            <span className="material-icons" aria-hidden="true">
-              keyboard_arrow_down
-            </span>
-          </StyledSelect>
+          <TimezonePicker
+            value={timezone}
+            name="timezone"
+            label="Timezone"
+            onChange={this.handleChange}
+          />
         </form>
         <AddTimeToDate onModify={this.handleModify} date={pickedDate} />
         <TimestampOutput outputDate={outputDate} />
