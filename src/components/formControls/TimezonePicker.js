@@ -41,6 +41,16 @@ const Wrapper = styled.div`
 
 const timezones = getSortedTimezones();
 
+let tzLookup = null;
+let tzLookupImporter = null;
+
+const getTimezoneFromMapEvent = mapEvent => {
+  if (!tzLookup || !mapEvent) {
+    return;
+  }
+  return tzLookup(mapEvent.latLng.lat(), mapEvent.latLng.lng());
+};
+
 class TimezonePicker extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
@@ -57,6 +67,14 @@ class TimezonePicker extends Component {
     this.setState({
       mapOpen: true
     });
+    if (!tzLookupImporter) {
+      // Preload the tz-lookup library
+      tzLookupImporter = import(/* webpackChunkName: "tz-lookup" */ 'tz-lookup').then(
+        tzLookupModule => {
+          tzLookup = tzLookupModule.default;
+        }
+      );
+    }
   };
 
   handleMapDialogClose = () => {
@@ -84,9 +102,22 @@ class TimezonePicker extends Component {
     );
   };
 
-  handleMapMouseMove = location => {
-    console.log('Mouse over??');
-    console.log(location);
+  handleMapMouseMove = mapEvent => {
+    const timezone = getTimezoneFromMapEvent(mapEvent);
+  };
+
+  handleMapClick = mapEvent => {
+    const { name, onChange } = this.props;
+    const timezone = getTimezoneFromMapEvent(mapEvent);
+    if (timezone) {
+      onChange({
+        target: {
+          name,
+          value: timezone
+        }
+      });
+    }
+    console.log(timezone);
   };
 
   render() {
@@ -110,7 +141,8 @@ class TimezonePicker extends Component {
           open={mapOpen}
           onClose={this.handleClose}
           aria-labelledby="timezone-dialog-title"
-          fullWidth>
+          fullWidth
+          maxWidth="md">
           <DialogTitle id="timezone-dialog-title">
             Select a Timezone
           </DialogTitle>
@@ -119,7 +151,10 @@ class TimezonePicker extends Component {
               Select your location on the map below
             </DialogContentText>
             {DialogSelectElement}
-            <Map onMouseMove={this.handleMapMouseMove} />
+            <Map
+              onMouseMove={this.handleMapMouseMove}
+              onClick={this.handleMapClick}
+            />
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleMapDialogClose}>Close</Button>
