@@ -27,9 +27,9 @@ const loadMomentData = localeName => {
   if (localeName === 'en-US' || localeName === 'en') {
     return Promise.resolve();
   }
-  return import(/* webpackChunkName: "moment-locales/[index]" */ `moment/locale/${localeName.toLowerCase()}.js`)
+  return import(/* webpackChunkName: "moment-locales/[request]" */ `moment/locale/${localeName.toLowerCase()}.js`)
     .catch(err =>
-      import(/* webpackChunkName: "moment-locales/[index]" */ `moment/locale/${
+      import(/* webpackChunkName: "moment-locales/[request]" */ `moment/locale/${
         localeName.split('-')[0]
       }.js`)
     )
