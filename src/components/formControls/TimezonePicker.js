@@ -23,7 +23,7 @@ const getSortedTimezones = () => {
       const offset = moment.tz(zone).format('Z');
       return {
         name: zone,
-        label: `(GMT ${offset}) ${zone}`,
+        label: `(GMT ${offset}) ${zone}`.replace(/_/g, ' '),
         offset: offset
       };
     })
