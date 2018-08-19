@@ -1,7 +1,7 @@
 const path = require('path');
 const Promise = require('bluebird');
 const fs = require('fs-extra');
-const englishI18n = require('../src/i18n/en.json');
+const englishI18n = require('../translations/en.json');
 
 // Creates a client
 
@@ -47,7 +47,7 @@ const getTranslationsForLanguage = languageCode => {
 
 const setNewLanguageFile = (languageCode, newTranslations) => {
   return fs.outputJson(
-    path.resolve(__dirname, `../src/i18n/${languageCode}.json`),
+    path.resolve(__dirname, `../translations/${languageCode}.json`),
     newTranslations,
     {
       spaces: '  '
