@@ -3,6 +3,7 @@ dist/
 .terraform
 quality/
 .nyc_output/
+.aws_credentials.json
 
 # Misc
 .DS_Store
