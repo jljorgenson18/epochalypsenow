@@ -1,1 +1,5 @@
-{"readableToTimestamp":"Lisable à l'horodatage","timestampToReadable":"Horodatage à lisibles"}
+{
+  "Readable To Timestamp": "Lisable à l'horodatage",
+  "Timestamp To Readable": "Horodatage à lisibles",
+  "Modify Date": "Modifier la date"
+}

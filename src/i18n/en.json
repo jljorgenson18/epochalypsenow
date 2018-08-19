@@ -1,4 +1,5 @@
 {
-  "readableToTimestamp": "Readable To Timestamp",
-  "timestampToReadable": "Timestamp To Readable"
+  "Readable To Timestamp": "Readable To Timestamp",
+  "Timestamp To Readable": "Timestamp To Readable",
+  "Modify Date": "Modify Date"
 }

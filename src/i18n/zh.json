@@ -1,1 +1,5 @@
-{"readableToTimestamp":"可读到时灯","timestampToReadable":"可读的时间表"}
+{
+  "Readable To Timestamp": "可读到时灯",
+  "Timestamp To Readable": "可读的时间表",
+  "Modify Date": "修改日期"
+}

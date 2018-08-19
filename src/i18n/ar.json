@@ -1,1 +1,5 @@
-{"readableToTimestamp":"قابل للقراءة إلى ختم زمني","timestampToReadable":"ختم زمني للقراءة"}
+{
+  "Readable To Timestamp": "قابل للقراءة إلى ختم زمني",
+  "Timestamp To Readable": "ختم زمني للقراءة",
+  "Modify Date": "تاريخ التعديل"
+}

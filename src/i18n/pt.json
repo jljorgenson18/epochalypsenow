@@ -1,1 +1,5 @@
-{"readableToTimestamp":"Leitável ao carimbo de data/hora","timestampToReadable":"Carimbo de data/hora para legível"}
+{
+  "Readable To Timestamp": "Leitável ao carimbo de data/hora",
+  "Timestamp To Readable": "Carimbo de data/hora para legível",
+  "Modify Date": "Modificar data"
+}

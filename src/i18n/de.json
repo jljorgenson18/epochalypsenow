@@ -1,1 +1,5 @@
-{"readableToTimestamp":"Lesbar für Zeitstempel","timestampToReadable":"Zu lesbarer Zeitstempel"}
+{
+  "Readable To Timestamp": "Lesbar für Zeitstempel",
+  "Timestamp To Readable": "Zu lesbarer Zeitstempel",
+  "Modify Date": "Datum ändern"
+}

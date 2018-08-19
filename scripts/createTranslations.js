@@ -54,7 +54,10 @@ const getTranslationsForLanguage = languageCode => {
 const setNewLanguageFile = (languageCode, newTranslations) => {
   return fs.outputJson(
     path.resolve(__dirname, `../src/i18n/${languageCode}.json`),
-    newTranslations
+    newTranslations,
+    {
+      spaces: '  '
+    }
   );
 };
 
