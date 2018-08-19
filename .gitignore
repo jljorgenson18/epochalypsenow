@@ -4,6 +4,7 @@ dist/
 quality/
 .nyc_output/
 .aws_credentials.json
+.google_credentials.json
 
 # Misc
 .DS_Store

@@ -1,49 +1,43 @@
-const AWS = require('aws-sdk');
 const path = require('path');
 const Promise = require('bluebird');
 const fs = require('fs-extra');
+const englishI18n = require('../src/i18n/en.json');
+
+// Creates a client
 
 let credentials;
 try {
-  credentials = require('../.aws_credentials.json');
+  credentials = require('../.google_credentials.json');
 } catch (err) {
-  console.error('Credentials required at .aws_credentials.json!');
+  console.error('Credentials required at .google_credentials.json!');
   process.exit(1);
 }
 
-AWS.config.update({
-  region: 'us-east-1',
-  credentials: new AWS.Credentials(
-    credentials.accessKeyId,
-    credentials.secretAccessKey
-  )
+process.env.GOOGLE_APPLICATION_CREDENTIALS = path.resolve(
+  __dirname,
+  '../.google_credentials.json'
+);
+
+const Translate = require('@google-cloud/translate');
+const translate = new Translate({
+  projectId: credentials.projectId
 });
 
-const translatableLanguages = [
-  'ar', // Arabic
-  'zh', // Chinese (Simplified),
-  'fr', // French,
-  'de', // German,
-  'pt', // Portuguese,
-  'es' // Spanish
-];
-
-const englishI18n = require('../src/i18n/en.json');
-const translate = new AWS.Translate();
+const getAllLanguages = () => {
+  return translate.getLanguages();
+};
 
 const getTranslationsForLanguage = languageCode => {
   const newTranslations = {};
   return Promise.mapSeries(Object.keys(englishI18n), translateKey => {
     const text = englishI18n[translateKey];
     return translate
-      .translateText({
-        SourceLanguageCode: 'en',
-        TargetLanguageCode: languageCode,
-        Text: text
+      .translate(text, {
+        from: 'en',
+        to: languageCode
       })
-      .promise()
-      .then(response => {
-        newTranslations[translateKey] = response.TranslatedText;
+      .then(results => {
+        newTranslations[translateKey] = results[0];
       });
   }).then(() => {
     console.log(newTranslations);
@@ -61,14 +55,21 @@ const setNewLanguageFile = (languageCode, newTranslations) => {
   );
 };
 
-const createNewTranslation = languageCode => {
-  return getTranslationsForLanguage(languageCode).then(newTranslations => {
-    return setNewLanguageFile(languageCode, newTranslations);
+const createNewTranslation = language => {
+  // Already have it
+  if (language.code === 'en') {
+    return Promise.resolve();
+  }
+  return getTranslationsForLanguage(language.code).then(newTranslations => {
+    return setNewLanguageFile(language.code, newTranslations);
   });
 };
 
 const createTranslations = () => {
-  return Promise.mapSeries(translatableLanguages, createNewTranslation);
+  return getAllLanguages().then(results => {
+    const languages = results[0];
+    return Promise.mapSeries(languages, createNewTranslation);
+  });
 };
 
 createTranslations();
