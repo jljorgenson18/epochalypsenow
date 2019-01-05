@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import AddIcon from '@material-ui/icons/Add';
+import ExpandIcon from '@material-ui/icons/Add';
+import CollapseIcon from '@material-ui/icons/Remove';
 
 import Button from '../../components/Button';
 import StyledSelect from '../../components/formControls/Select';
@@ -13,6 +14,7 @@ const modifyDate = (values, currentDate) => {
   newDate[operator](amount, timeKey);
   return newDate;
 };
+
 const Wrapper = styled.div`
   overflow: hidden;
 
@@ -109,7 +111,7 @@ class AddTimeToDate extends Component {
       <Wrapper className={expanded ? 'open' : ''}>
         <button className="accordionTrigger" onClick={this.handleClick}>
           Modify Date
-          <AddIcon />
+          {expanded ? <CollapseIcon /> : <ExpandIcon />}
         </button>
         <form onSubmit={this.handleSubmit} className={expanded ? 'open' : ''}>
           <StyledSelect

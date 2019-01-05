@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment-timezone';
 import DateTimePicker from 'material-ui-pickers/DateTimePicker';
+import styled from 'styled-components';
 
 import TimestampOutput from './TimestampOutput';
 import AddTimeToDate from './AddTimeToDate';
@@ -8,6 +9,10 @@ import TimezonePicker from '../../components/formControls/TimezonePicker';
 
 // Like iso without the timezone
 const tzConversionFormat = 'YYYY-MM-DDTHH:mm:ss';
+
+const StyledForm = styled.form`
+
+`;
 
 const getOutputDate = values => {
   const { timezone, pickedDate } = values;
@@ -81,7 +86,7 @@ class ReadableToTimestamp extends Component {
     } = this.state;
     return (
       <div className="readable">
-        <form>
+        <StyledForm>
           <DateTimePicker
             value={pickedDate}
             onChange={this.handleDatePickerChange}
@@ -92,7 +97,7 @@ class ReadableToTimestamp extends Component {
             label="Timezone"
             onChange={this.handleChange}
           />
-        </form>
+        </StyledForm>
         <AddTimeToDate onModify={this.handleModify} date={pickedDate} />
         <TimestampOutput outputDate={outputDate} />
       </div>
