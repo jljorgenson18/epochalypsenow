@@ -2,6 +2,7 @@ import React from 'react';
 import { expect } from 'chai';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
+import toJson from 'enzyme-to-json';
 import { AppComponent } from '~/src/containers/App';
 
 describe('App', () => {
@@ -28,6 +29,16 @@ describe('App', () => {
 
     // Assert
     expect(wrapper.find('App__Wrapper')).to.have.length(1);
+  });
+
+  it('should match the snapshot', async () => {
+    // Arrange
+
+    // Act
+    const wrapper = shallow(<AppComponent {...mockProps} />);
+
+    // Assert
+    expect(toJson(wrapper)).to.matchSnapshot();
   });
 
   // Waiting until Enzyme figures their shit out

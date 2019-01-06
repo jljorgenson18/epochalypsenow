@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App should match the snapshot 1`] = `
+<App__Wrapper>
+  <GlobalStyleComponent />
+  <App__Header>
+    <h1>
+      Epochalypse Now
+    </h1>
+    <CurrentTimeStamp />
+  </App__Header>
+  <App__Calculator>
+    <Tabs>
+      <Tab
+        activeTab="readableToTimestamp"
+        onClick={[Function]}
+        section="readableToTimestamp"
+      >
+        Readable To Timestamp
+      </Tab>
+      <Tab
+        activeTab="readableToTimestamp"
+        onClick={[Function]}
+        section="timestampToReadable"
+      >
+        Timestamp To Readable
+      </Tab>
+    </Tabs>
+    <App__ActiveSection>
+      <ReadableToTimestamp />
+    </App__ActiveSection>
+  </App__Calculator>
+</App__Wrapper>
+`;
