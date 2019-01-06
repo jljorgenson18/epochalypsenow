@@ -8,7 +8,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import App from './App';
-import i18n, { initialize as i18nInitialize } from '../i18n/index';
+import i18n, { initialize as i18nInitialize } from '../i18n';
 
 const theme = createMuiTheme({
   palette: {},

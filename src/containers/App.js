@@ -122,13 +122,13 @@ class App extends Component {
               section="readableToTimestamp"
               onClick={this.handleClick}
               activeTab={activeSection}>
-              {t('readableToTimestamp')}
+              {t('Readable To Timestamp')}
             </Tab>
             <Tab
               section="timestampToReadable"
               onClick={this.handleClick}
               activeTab={activeSection}>
-              {t('timestampToReadable')}
+              {t('Timestamp To Readable')}
             </Tab>
           </Tabs>
           <ActiveSection>

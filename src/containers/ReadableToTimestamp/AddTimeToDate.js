@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+<<<<<<< HEAD
 import ExpandIcon from '@material-ui/icons/Add';
 import CollapseIcon from '@material-ui/icons/Remove';
+=======
+import AddIcon from '@material-ui/icons/Add';
+import { translate } from 'react-i18next';
+>>>>>>> 2096b18471fcfa7b926db581d204c7e308801832
 
 import Button from '../../components/Button';
 import StyledSelect from '../../components/formControls/Select';
@@ -106,12 +111,18 @@ class AddTimeToDate extends Component {
   };
 
   render() {
+    const { t } = this.props;
     const { operator, timeKey, amount, expanded } = this.state;
     return (
       <Wrapper className={expanded ? 'open' : ''}>
         <button className="accordionTrigger" onClick={this.handleClick}>
+<<<<<<< HEAD
           Modify Date
           {expanded ? <CollapseIcon /> : <ExpandIcon />}
+=======
+          {t('Modify Date')}
+          <AddIcon />
+>>>>>>> 2096b18471fcfa7b926db581d204c7e308801832
         </button>
         <form onSubmit={this.handleSubmit} className={expanded ? 'open' : ''}>
           <StyledSelect
@@ -151,4 +162,5 @@ class AddTimeToDate extends Component {
   }
 }
 
-export default AddTimeToDate;
+export const AddTimeToDateComponent = AddTimeToDate;
+export default translate()(AddTimeToDate);
