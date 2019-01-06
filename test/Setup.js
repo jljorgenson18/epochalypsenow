@@ -1,9 +1,11 @@
-import Adapter from 'enzyme-adapter-react-16';
-import Enzyme from 'enzyme';
-import chai from 'chai';
-import 'ignore-styles'; // Will ignore style and image imports
-import chaiJestSnapshot from 'chai-jest-snapshot';
-import { setupDom } from './helpers/JSDomSetup';
+// Uses commonJS for better us with Wallaby since it executes this
+// before Babel compiles
+const Adapter = require('enzyme-adapter-react-16');
+const Enzyme = require('enzyme');
+const chai = require('chai');
+require('ignore-styles'); // Will ignore style and image imports
+const chaiJestSnapshot = require('chai-jest-snapshot');
+const { setupDom } = require('./helpers/JSDomSetup');
 
 chai.use(chaiJestSnapshot);
 

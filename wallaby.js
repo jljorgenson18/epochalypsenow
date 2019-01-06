@@ -35,8 +35,9 @@ module.exports = function(wallaby) {
     compilers: {
       '**/*.js': wallaby.compilers.babel()
     },
-
-    setup: function() {
+    setup: function(w) {
+      const mocha = w.testFramework;
+      mocha.delay();
       require('./test/Setup');
     }
   };
