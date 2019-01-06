@@ -9,9 +9,6 @@ import Tabs from '../components/tabs/Tabs';
 import Tab from '../components/tabs/Tab';
 import CurrentTimestamp from '../components/CurrentTimestamp';
 
-import faviconImage from '~/static/images/favicon-base.jpg';
-console.log(faviconImage);
-
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Roboto');
 
