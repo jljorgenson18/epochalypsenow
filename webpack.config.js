@@ -1,9 +1,7 @@
 'use strict';
 const path = require('path');
 const webpack = require('webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const MinifyPlugin = require('babel-minify-webpack-plugin');
 const RobotstxtPlugin = require('robotstxt-webpack-plugin').default;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
@@ -25,8 +23,8 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: 'builds/[name].bundle.js',
-    chunkFilename: 'builds/[name].bundle.js',
+    filename: 'builds/[name].[hash].js',
+    chunkFilename: 'builds/[name].[hash].js',
     publicPath: '/'
   },
   devServer: devMode
@@ -50,25 +48,30 @@ module.exports = {
       {
         test: /\.css$/,
         use: [{ loader: 'style-loader' }, { loader: 'css-loader' }]
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[path][name].[hash].[ext]'
+            }
+          }
+        ]
       }
     ]
   },
-  optimization: {
-    minimizer: [new MinifyPlugin()]
-  },
   plugins: [
     new CleanWebpackPlugin(['dist']),
-    // Javascript Plugins
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(
         devMode ? 'development' : 'production'
       )
     }),
     devMode ? new webpack.HotModuleReplacementPlugin() : null,
-    // General Assets
-    new CopyWebpackPlugin([{ from: './static', to: 'static' }]),
     new HtmlWebpackPlugin({
-      template: './template.html'
+      template: './src/index.html'
     }),
     new RobotstxtPlugin({
       policy: [

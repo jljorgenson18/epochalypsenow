@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styled, { injectGlobal } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import { translate } from 'react-i18next';
 
 import TimestampToReadable from './TimestampToReadable/index';
@@ -9,7 +9,10 @@ import Tabs from '../components/tabs/Tabs';
 import Tab from '../components/tabs/Tab';
 import CurrentTimestamp from '../components/CurrentTimestamp';
 
-injectGlobal`
+import faviconImage from '~/static/images/favicon-base.jpg';
+console.log(faviconImage);
+
+const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Roboto');
 
   * {
@@ -112,6 +115,7 @@ class App extends Component {
     const { activeSection } = this.state;
     return (
       <Wrapper>
+        <GlobalStyle />
         <Header>
           <h1>Epochalypse Now</h1>
           <CurrentTimestamp />

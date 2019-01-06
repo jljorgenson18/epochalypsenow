@@ -1,5 +1,5 @@
-const { JSDOM } = require('jsdom');
-const { fetch } = require('whatwg-fetch');
+import { JSDOM } from 'jsdom';
+import { fetch } from 'whatwg-fetch';
 
 const setupCustomWindow = window => {};
 

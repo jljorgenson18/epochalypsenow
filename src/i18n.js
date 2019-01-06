@@ -31,8 +31,6 @@ const getResources = localeName => {
 
 export const initialize = (locale = '') => {
   return getResources(locale).then(resources => {
-    console.log(resources);
-
     if (!resources[locale]) {
       locale = defaultLocale;
     }

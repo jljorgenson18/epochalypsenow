@@ -16,7 +16,6 @@ terraform {
 
 locals {
   cloudfront_hosted_zone_id = "Z2FDTNDATAQYW2"
-  numbers_api_id            = "Custom-NumberAPI"
 }
 
 provider "aws" {
@@ -77,43 +76,11 @@ resource "aws_cloudfront_distribution" "cf" {
     origin_id   = "S3-${aws_s3_bucket.b.id}"
   }
 
-  origin {
-    domain_name = "numbersapi.com"
-    origin_id   = "${local.numbers_api_id}"
-
-    custom_origin_config {
-      origin_protocol_policy = "http-only"
-      http_port              = 80
-      https_port             = 443
-      origin_ssl_protocols   = ["TLSv1", "TLSv1.1", "TLSv1.2"]
-    }
-  }
-
   custom_error_response {
     error_caching_min_ttl = 300
     error_code            = 403
     response_code         = 404
     response_page_path    = "/index.html"
-  }
-
-  cache_behavior {
-    allowed_methods        = ["GET", "HEAD"]
-    cached_methods         = ["GET", "HEAD"]
-    compress               = false
-    target_origin_id       = "${local.numbers_api_id}"
-    viewer_protocol_policy = "redirect-to-https"
-    min_ttl                = 15
-    default_ttl            = 86400
-    max_ttl                = 31536000
-    path_pattern           = "*/date"
-
-    forwarded_values {
-      query_string = true
-
-      cookies {
-        forward = "none"
-      }
-    }
   }
 
   default_cache_behavior {
