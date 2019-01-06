@@ -1,10 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import sinon from 'sinon';
-import { mount } from 'enzyme';
-import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
-import MomentUtils from 'material-ui-pickers/utils/moment-utils';
-
+import { shallow } from 'enzyme';
 import { AppComponent } from '~/src/containers/App';
 
 describe('App', () => {
@@ -23,34 +20,26 @@ describe('App', () => {
     expect(AppComponent).to.be.ok;
   });
 
-  // Waiting until Enzyme figures their shit out
-  xit('should render the app', () => {
+  it('should render the app', () => {
     // Arrange
 
     // Act
-    const wrapper = mount(
-      <MuiPickersUtilsProvider utils={MomentUtils}>
-        <AppComponent {...mockProps} />
-      </MuiPickersUtilsProvider>
-    );
+    const wrapper = shallow(<AppComponent {...mockProps} />);
 
     // Assert
     expect(wrapper.find('App__Wrapper')).to.have.length(1);
   });
 
   // Waiting until Enzyme figures their shit out
-  xit('should update the activeSection when clicking a tab', () => {
+  it('should update the activeSection when clicking a tab', () => {
     // Arrange
-    const wrapper = mount(
-      <MuiPickersUtilsProvider utils={MomentUtils}>
-        <AppComponent {...mockProps} />
-      </MuiPickersUtilsProvider>
-    );
+    const wrapper = shallow(<AppComponent {...mockProps} />);
 
     // Act
     wrapper
       .find('Tabs Tab')
       .at(1)
+      .dive()
       .find('button')
       .simulate('click');
 

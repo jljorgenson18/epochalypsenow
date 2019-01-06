@@ -13,19 +13,17 @@ const Tab = styled.div`
   margin-bottom: 20px;
 `;
 
-class Tabs extends Component {
-  static propTypes = {
-    children: PropTypes.node.isRequired
-  };
-
-  render() {
-    const { children } = this.props;
-    return (
-      <TabsContainer>
-        <Tab>{children}</Tab>
-      </TabsContainer>
-    );
-  }
+function Tabs(props) {
+  const { children } = props;
+  return (
+    <TabsContainer>
+      <Tab>{children}</Tab>
+    </TabsContainer>
+  );
 }
+
+Tabs.propTypes = {
+  children: PropTypes.node.isRequired
+};
 
 export default Tabs;

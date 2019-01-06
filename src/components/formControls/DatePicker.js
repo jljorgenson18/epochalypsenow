@@ -30,27 +30,25 @@ const StyledPicker = styled(Picker)`
   }
 `;
 
-class DatePicker extends Component {
-  static propTypes = {
-    date: PropTypes.object,
-    onChange: PropTypes.func.isRequired
-  };
-
-  render() {
-    const { date, onChange } = this.props;
-    return (
-      <Wrapper>
-        <StyledPicker
-          selected={date}
-          onChange={onChange}
-          timeIntervals={15}
-          showTimeSelect
-          timeFormat="LT"
-          dateFormat="LLL"
-        />
-      </Wrapper>
-    );
-  }
+function DatePicker(props) {
+  const { date, onChange } = props;
+  return (
+    <Wrapper>
+      <StyledPicker
+        selected={date}
+        onChange={onChange}
+        timeIntervals={15}
+        showTimeSelect
+        timeFormat="LT"
+        dateFormat="LLL"
+      />
+    </Wrapper>
+  );
 }
+
+DatePicker.propTypes = {
+  date: PropTypes.object,
+  onChange: PropTypes.func.isRequired
+};
 
 export default DatePicker;

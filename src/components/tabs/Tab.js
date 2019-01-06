@@ -49,30 +49,24 @@ const StyledTab = styled.div`
   }
 `;
 
-class Tab extends Component {
-  static propTypes = {
-    section: PropTypes.string,
-    onClick: PropTypes.func.isRequired,
-    children: PropTypes.node.isRequired,
-    activeTab: PropTypes.string
-  };
-
-  handleClick = event => {
-    const { section, onClick } = this.props;
-    onClick(section);
-  };
-  render() {
-    const { children, section, activeTab } = this.props;
-    return (
-      <StyledTab>
-        <button
-          className={section === activeTab ? 'active' : ''}
-          onClick={this.handleClick}>
-          {children}
-        </button>
-      </StyledTab>
-    );
-  }
+function Tab(props) {
+  const { children, section, activeTab, onClick } = props;
+  return (
+    <StyledTab>
+      <button
+        className={section === activeTab ? 'active' : ''}
+        onClick={() => onClick(section)}>
+        {children}
+      </button>
+    </StyledTab>
+  );
 }
+
+Tab.propTypes = {
+  section: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
+  activeTab: PropTypes.string
+};
 
 export default Tab;
