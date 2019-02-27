@@ -8,9 +8,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 const Wrapper = styled.div`
   input {
     appearance: none;
-    background-color: #fff;
+    background-color: blue;
     border: 1px solid #c2c2c2;
-    // border-radius: 2px;
+    border-radius: 2px;
     padding: 5px;
     margin: 10px 10px 10px 0;
 
