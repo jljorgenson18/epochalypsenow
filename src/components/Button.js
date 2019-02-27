@@ -17,7 +17,7 @@ const Button = styled.button`
   transition: all 0.5s ease;
   background: none;
   z-index: 1;
-  // margin: 5px;
+  margin: 6px;
   min-height: 36px;
 
   &::after {

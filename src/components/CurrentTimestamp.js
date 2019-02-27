@@ -20,14 +20,14 @@ class CurrentTimeStamp extends Component {
     const nextTimestamp = String(Number(newTimestamp) + 1);
     const newDigits = getDigitsFromTimestamp(newTimestamp);
     const nextDigits = getDigitsFromTimestamp(nextTimestamp);
-    console.log(newDigits);
+    // console.log(newDigits);
     const changingDigits = {};
     newDigits.forEach((digit, idx) => {
       if (digit !== nextDigits[idx]) {
         changingDigits[idx] = true;
       }
     });
-    console.log(newDigits);
+    // console.log(newDigits);
       this.setState({
         changingDigits: changingDigits,
         digits: newDigits
