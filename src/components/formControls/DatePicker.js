@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   input {
     appearance: none;
     // background-color: #fff;
-    border: 1px solid #c2c2c2;
+    // border: 1px solid #c2c2c2;
     border-radius: 2px;
     // padding: 5px;
     margin: 10px 10px 10px 0;
